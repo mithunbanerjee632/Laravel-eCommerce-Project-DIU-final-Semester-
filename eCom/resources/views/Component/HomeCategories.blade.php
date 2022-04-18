@@ -5,6 +5,8 @@
             <a href="#fashion_1b" class="tab-control-item">Watch</a>
             <a href="#fashion_1c" class="tab-control-item">Laptop</a>
             <a href="#fashion_1d" class="tab-control-item">Tablet</a>
+            <a href="#fashion_1b" class="tab-control-item">Desktop</a>
+            <a href="#fashion_1c" class="tab-control-item">Gift and Toys</a>
         </div>
         <div class="tab-contents">
 

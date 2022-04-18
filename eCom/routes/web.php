@@ -26,9 +26,9 @@ use App\Http\Controllers\TermsConditionController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('Home');
-});
+});*/
 
 Route::get('/',[HomeController::class,'HomePage']);
 Route::get('/ShopPage',[ShopController::class,'ShopPage']);
