@@ -12,7 +12,7 @@ class ShopController extends Controller
    function ShopPage(){
 
        $products = ProductModel::orderby('id','desc')->get();
-       return view('Shop')->with('products',$products);
+       return view('Shop',['products'=>$products])/*->with('products',$products)*/;
 
       /* $products = json_decode( $products = ProductModel::orderby('id','desc')->get());
        return view('Shop',['products'=>$products]);*/

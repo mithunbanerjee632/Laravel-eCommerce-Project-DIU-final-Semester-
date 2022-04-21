@@ -17,9 +17,20 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 Route::get('/', [HomeController::class,'HomeIndex']);
 
-Route::get('/products', [ProductController::class,'ProductIndex']);
+
 Route::get('/category', [CategoryController::class,'CategoryIndex']);
+
+//Products Management
+Route::get('/products', [ProductController::class,'ProductIndex']);
+Route::get('/getProductsData', [ProductController::class,'ProductsData']);
+Route::post('/ProductAdd', [ProductController::class,'ProductAdd']);
+Route::post('/PorductDetails', [ProductController::class,'ProductDetails']);
+Route::post('/UpdateProductDetails', [ProductController::class,'UpdateProduct']);
+Route::post('/ProductDelete', [ProductController::class,'DeleteProduct']);
+
+
+
 

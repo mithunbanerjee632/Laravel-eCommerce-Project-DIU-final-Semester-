@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductModel;
 use Illuminate\Http\Request;
-use App\Models\SalesModel;
 use App\Models\VisitorModel;
 
 class HomeController extends Controller
@@ -16,9 +16,10 @@ class HomeController extends Controller
         VisitorModel::insert(['ip_address'=>$UserIp,'visit_time'=>$TimeDate]);
 
 
+        $products = ProductModel::orderby('id','asc')->limit(6)->get();
+        return view('Home',['products'=>$products])/*->with('products',$products)*/;
 
-
-        /*$SalesData = json_decode(SalesModel::all());
+        /*$SalesData = json_decode(ProductModel::orderby('id','desc')->get());
         return view('Home',['SalesData'=>$SalesData]);*/
     }
 }
