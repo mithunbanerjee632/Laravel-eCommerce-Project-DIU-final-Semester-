@@ -21,7 +21,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::get('/', [HomeController::class,'HomeIndex']);
 
 
-Route::get('/category', [CategoryController::class,'CategoryIndex']);
+
 
 //Products Management
 Route::get('/products', [ProductController::class,'ProductIndex']);
@@ -31,6 +31,12 @@ Route::post('/PorductDetails', [ProductController::class,'ProductDetails']);
 Route::post('/UpdateProductDetails', [ProductController::class,'UpdateProduct']);
 Route::post('/ProductDelete', [ProductController::class,'DeleteProduct']);
 
+//Category Management System
 
-
+Route::get('/category', [CategoryController::class,'CategoryIndex']);
+Route::get('/getCategoryData', [CategoryController::class,'CategoryData']);
+Route::post('/AddCategory', [CategoryController::class,'CategoryAdd']);
+Route::post('/getCategoryDetails', [CategoryController::class,'CategoryDetails']);
+Route::post('/CategoryUpdate', [CategoryController::class,'CategoryUpdate']);
+Route::post('/DeleteCategory', [CategoryController::class,'CategoryDelete']);
 
