@@ -44,6 +44,13 @@
                 </li>
 
                 <li class="sidebar-item  ">
+                    <a href="{{ url('/brand') }}" class='sidebar-link'>
+                        <i class="bi bi-view-list"></i>
+                        <span>Brand</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  ">
                     <a href="" class='sidebar-link'>
                         <i class="bi bi-clipboard-data"></i>
                         <span>Orders</span>

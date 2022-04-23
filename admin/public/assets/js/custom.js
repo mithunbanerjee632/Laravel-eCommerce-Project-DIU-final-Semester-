@@ -1,221 +1,208 @@
-//Category Page table
-function getCategoriesData(){
-    axios.get('/getCategoryData')
-        .then(function (response){
+function getBrandsData(){
+    axios.get('/getBrandsData').then(function(response){
         if(response.status == 200){
-            $('#loaderDivCategories').addClass('d-none');
             $('#mainDivCategory').removeClass('d-none');
+            $('#loaderDivBrands').addClass('d-none');
 
-            $('#CategoryDataTable').DataTable().destroy();
-            $('#categories_table').empty();
+            $('#BrandsDataTable').DataTable().destroy();
+            $('#brands_table').empty();
 
             var jsonData = response.data;
 
-            $.each(jsonData,function (i,item){
+            $.each(jsonData,function(i,item){
                 $('<tr>').html(
-                    "<td>"+ jsonData[i].category_name +"</td>"+
-                    "<td>"+ jsonData[i].description +"</td>"+
+                    "<td>"+jsonData[i].brand_name+"</td>"+
+                    "<td>"+jsonData[i].description+"</td>"+
 
-
-                    "<td><a class='categoryEditBtn' data-id="+jsonData[i].id+"><i class='fas fa-edit'></i></a></td>"+
-                    "<td><a class='categoryDeleteBtn' data-id="+jsonData[i].id+"><i class='fas fa-trash-alt'></i></a></td>"
-                ).appendTo('#categories_table')
+                    "<td><a class='brandEditBtnId' data-id="+jsonData[i].id+"><i class='fas fa-edit'></i></a></td>"+
+                    "<td><a class='brandDeleteBtnId' data-id="+jsonData[i].id+"><i class='fas fa-trash-alt'></i></a></td>"
+                ).appendTo('#brands_table');
             });
 
-            //Category table Edit Icon click
-
-            $('.categoryEditBtn').click(function(){
+            //Edit icon Click
+            $('.brandEditBtnId').click(function(){
                 var id = $(this).data('id');
-                $('#categoryEditId').html(id);
-                GetCategoryDetails(id);
-                $('#editCategoryModal').modal('show');
-
+                $('#brandEditId').html(id);
+                getBrandUpdateDetails(id);
+                $('#editBrandModal').modal('show');
             });
 
-            //Category Table Delete Icon click
+            //Delete icon click
 
-            $('.categoryDeleteBtn').click(function(){
+            $('.brandDeleteBtnId').click(function(){
                 var id = $(this).data('id');
-                $('#CategoryDeleteId').html(id);
-                $('#deleteCategoryModal').modal('show');
+                $('#BrandDeleteId').html(id);
+                $('#deleteBrandModal').modal('show');
             });
-
 
             //Data table
 
-            $('#CategoryDataTable').dataTable({"order":false});
+            $('#BrandsDataTable').dataTable({"order":false});
             $('.dataTables_length').addClass('bs-select');
 
-        }else{
-            $('#loaderDivCategories').addClass('d-none');
-            $('#wrongDivCategories').removeClass('d-none');
         }
-    })
-        .catch(function (error){
-            $('#loaderDivCategories').addClass('d-none');
-            $('#wrongDivCategories').removeClass('d-none');
+    }).catch(function(error){
+
     });
 }
 
-//Category Add button click
-$('#addNewCategoryBtnId').click(function(){
-    $('#addCategoryModal').modal('show');
+//Brand Add button click
+$('#addNewBrandBtnId').click(function(){
+    $('#addBrandModal').modal('show');
 });
 
 //Modal Add button click
+$('#brandAddConfirmBtn').click(function(){
+   var BrandName =  $('#brandNameAddId').val();
+   var BrandDes =  $('#brandDesAddId').val();
 
-$('#categoryAddConfirmBtn').click(function(){
-    var CategoryName = $('#categoryNameAddId').val();
-    var CategoryDes = $('#categoryDesAddId').val();
-
-    CategoryAdd(CategoryName,CategoryDes);
+    BrandAdd(BrandName,BrandDes);
 });
 
+//Add Brand
 
-//Add Category
+function BrandAdd(BrandName,BrandDes){
+    if(BrandName.length == 0){
+        toastr.error("Brand Name Must not Be Empty!");
+    }else if(BrandDes.length == 0){
+        toastr.error("Brand Description Must not Be Empty!");
+    }else{
+        $('#brandAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'></span></div>"); //spinner animation(response pawar aage)
 
-function CategoryAdd(CategoryName,CategoryDes){
-   if(CategoryAdd.length == 0){
-       toastr.error("Category Name Must Not be Empty!");
-   }else if(CategoryDes.length == 0){
-       toastr.error("Category Description Must Not be Empty!");
-   }else{
-       $('#categoryAddConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'></span></div>"); //spinner animation(response pawar aage)
+        axios.post('/BrandAdd',{
+            brand_name:BrandName,
+            brand_des:BrandDes
+        })
+            .then(function(response){
+                if(response.status == 200){
+                    $('#brandAddConfirmBtn').html('Add');
 
-       axios.post('/AddCategory',{
-           category_name:CategoryName,
-           category_des:CategoryDes
-       }).then(function(response){
-            if(response.status == 200){
-                $('#categoryAddConfirmBtn').html('Add');
-                if(response.data == 1){
-                    $('#addCategoryModal').modal('hide');
-                    toastr.success('Category Inserted Successfully');
-                    getCategoriesData();
+                    if(response.data == 1){
+                        $('#addBrandModal').modal('hide');
+                        toastr.success('Brand Inserted Successfully!');
+                        getBrandsData();
+                    }else{
+                        $('#addBrandModal').modal('hide');
+                        toastr.error('Brand Not Inserted !');
+                        getBrandsData();
+                    }
                 }else{
-                    $('#addCategoryModal').modal('hide');
-                    toastr.success('Category Not Inserted !');
-                    getCategoriesData();
+                    $('#addBrandModal').modal('hide');
+                    toastr.error('Something Went Wrong !');
                 }
-            }else{
-                $('#addCategoryModal').modal('hide');
-                toastr.error('Something Went Wrong!');
-            }
-       }).catch(function(error){
-           $('#addCategoryModal').modal('hide');
-           toastr.error('Something Went Wrong!');
-       });
-   }
+        })
+            .catch(function(error){
+                $('#addBrandModal').modal('hide');
+                toastr.error('Something Went Wrong !');
+        });
+    }
 }
+//Each Brand details
+function getBrandUpdateDetails(editedId){
+    axios.post('/getBrandDetails',{id:editedId})
+        .then(function(response){
+            if(response.status == 200){
+                $('#brandUpdateForm').removeClass('d-none');
+                $('#brandEditLoader').addClass('d-none');
 
-//Each Category Details
+                var jsonData = response.data;
 
-function GetCategoryDetails(editId){
-    axios.post('/getCategoryDetails',{id:editId}).then(function(response){
+                $('#brandNameId').val(jsonData[i].brand_name);
+                $('#brandDesId').val(jsonData[i].description);
 
-           if(response.status == 200){
-               $('#categoryUpdateForm').removeClass('d-none');
-               $('#categoryEditLoader').addClass('d-none');
+            }else{
+                $('#brandEditWrong').removeClass('d-none');
+                $('#brandEditLoader').addClass('d-none');
 
-               var jsonData = response.data;
-
-               $('#categoryNameId').val(jsonData[0].category_name);
-               $('#categoryDesId').val(jsonData[0].description);
-           }else{
-               $('#categoryEditLoader').addClass('d-none');
-               $('#categoryEditWrong').removeClass('d-none');
-           }
-    }).catch(function(error){
-        $('#categoryEditLoader').addClass('d-none');
-        $('#categoryEditWrong').removeClass('d-none');
+            }
+        }).catch(function(error){
+            $('#brandEditWrong').removeClass('d-none');
+            $('#brandEditLoader').addClass('d-none');
     });
 }
 
-//Modal Update button click
+//Modal Update Icon click
+$('#brandUpdateConfirmBtn').click(function(){
+    var brandId = $('#brandEditId').html();
+    var brandName = $('#brandNameId').val();
+    var brandDes = $('#brandDesId').val();
 
-$('#categoryUpdateConfirmBtn').click(function(){
-    var catId = $('#categoryEditId').html();
-    var catName = $('#categoryNameId').val();
-    var catDes = $('#categoryDesId').val();
-
-    CategoryUpdate(catId,catName,catDes);
+    BrandUpdate(brandId,brandName,brandDes);
 });
 
+//Brand Update
 
-//Category Update
-
-function  CategoryUpdate(catId,catName,catDes){
-    if(catName.length == 0){
-        toastr.error('Category Name Must Not be Empty!');
-    }else if(catDes.length == 0){
-        toastr.error('Category Description Must Not be Empty!');
+function BrandUpdate(brandId,brandName,brandDes){
+    if(brandName.length == 0){
+        toastr.error('Brand Name Must Not be Empty!');
+    }else if(brandDes.length == 0){
+        toastr.error('Brand Description Must Not be Empty!');
     }else{
-        $('#categoryUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'></span></div>"); //spinner animation(response pawar aage)
+        $('#brandUpdateConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'></span></div>"); //spinner animation(response pawar aage)
 
-        axios.post('/CategoryUpdate',{
-            cat_id:catId,
-            cat_name:catName,
-            cat_des:catDes
+        axios.post('/UpdateBrand',{
+            brand_id:brandId,
+            brand_name:brandName,
+            brand_des:brandDes
+        })
+            .then(function(response){
+                if(response.status == 200){
+                    $('#brandUpdateConfirmBtn').html('Update');
 
-        }).then(function(response){
-            if(response.status == 200){
-                $('#categoryUpdateConfirmBtn').html('Update');
-
-                if(response.data == 1){
-                    $('#editCategoryModal').modal('hide');
-                    toastr.success('Category Updated Successfully');
-                    getCategoriesData();
-
+                    if(response.data == 1){
+                        $('#editBrandModal').modal('hide');
+                        toastr.success('Brand Update Successfully');
+                        getBrandsData();
+                    }else{
+                        $('#editBrandModal').modal('hide');
+                        toastr.error('Brand Not Updated !');
+                        getBrandsData();
+                    }
                 }else{
-                    $('#editCategoryModal').modal('hide');
-                    toastr.error('Category Not Updated !');
-                    getCategoriesData();
+                    $('#editBrandModal').modal('hide');
+                     toastr.error('Something Went Wrong !');
                 }
-            }else{
-                $('#editCategoryModal').modal('hide');
+            })
+            .catch(function(error){
+                $('#editBrandModal').modal('hide');
                 toastr.error('Something Went Wrong !');
-            }
-        }).catch(function (error){
-            $('#editCategoryModal').modal('hide');
-            toastr.error('Something Went Wrong !');
-        });
+            });
     }
 
 }
 
-//Modal Delete Icon click
+//Modal Delete Button click
+$('#BrandDeleteConfirmBtn').click(function(){
+    var id = $('#BrandDeleteId').html();
 
-$('#CategoryDeleteConfirmBtn').click(function(){
-    var id = $('#CategoryDeleteId').html();
-
-    CategoryDelete(id);
+    BrandDelete(id);
 });
 
-//Category Delete
+//Delete Brand
 
-function CategoryDelete(deleteId){
+function BrandDelete(deletedId){
     $('#CategoryDeleteConfirmBtn').html("<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'></span></div>");  //animation(response pawar aage)
 
-    axios.post('/DeleteCategory',{id:deleteId})
+    axios.post('/DeleteBrand',{id:deletedId})
         .then(function(response){
             if(response.status == 200){
-                $('#CategoryDeleteConfirmBtn').html('Yes');
+                $('#CategoryDeleteConfirmBtn').html("Yes");
+
                 if(response.data == 1){
-                    $('#deleteCategoryModal').modal('hide');
-                    toastr.success('Category Deleted Successfully');
-                    getCategoriesData();
+                   $('#deleteBrandModal').modal('hide');
+                   toastr.success('Brand Deleted Successfully');
+                   getBrandsData();
                 }else{
-                    $('#deleteCategoryModal').modal('hide');
-                    toastr.error('Category Not Deleted !');
-                    getCategoriesData();
+                    $('#deleteBrandModal').modal('hide');
+                    toastr.error('Brand Not Deleted !');
+                    getBrandsData();
                 }
             }else{
-                $('#deleteCategoryModal').modal('hide');
-                toastr.error('Something Went Wrong !');
+                $('#deleteBrandModal').modal('hide');
+                toastr.error('Something Went Wrong!');
             }
-        })
-        .catch(function(error){
-            $('#deleteCategoryModal').modal('hide');
-            toastr.error('Something Went Wrong !');
+        }).catch(function(error){
+        $('#deleteBrandModal').modal('hide');
+        toastr.error('Something Went Wrong!');
     });
 }

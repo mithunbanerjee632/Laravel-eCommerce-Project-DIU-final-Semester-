@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ProductController;
@@ -40,3 +41,10 @@ Route::post('/getCategoryDetails', [CategoryController::class,'CategoryDetails']
 Route::post('/CategoryUpdate', [CategoryController::class,'CategoryUpdate']);
 Route::post('/DeleteCategory', [CategoryController::class,'CategoryDelete']);
 
+//Brand Management System
+Route::get('/brand', [BrandController::class,'BrandIndex']);
+Route::get('/getBrandsData', [BrandController::class,'getBrandsData']);
+Route::post('/BrandAdd', [BrandController::class,'BrandAdd']);
+Route::post('/getBrandDetails', [BrandController::class,'BrandDetails']);
+Route::post('/UpdateBrand', [BrandController::class,'BrandUpdate']);
+Route::post('/DeleteBrand', [BrandController::class,'BrandDelete']);
