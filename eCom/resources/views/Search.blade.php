@@ -65,22 +65,22 @@
 
                         <ul class="product-list grid-products equal-container">
                             @foreach($products as $product)
-                            <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
-                                <div class="product product-style-3 equal-elem ">
-                                    @foreach($product->images as $image )
-                                    <div class="product-thumnail">
-                                        <a href="/ProductDetails/{{$product->slug}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                            <figure><img src="{{asset($image->image)}}" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
-                                        </a>
+                                <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                                    <div class="product product-style-3 equal-elem ">
+                                        @foreach($product->images as $image )
+                                            <div class="product-thumnail">
+                                                <a href="/ProductDetails/{{$product->slug}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                                                    <figure><img src="{{asset($image->image)}}" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                        <div class="product-info">
+                                            <a href="/ProductDetails/{{$product->slug}}" class="product-name"><span>{{ $product->title }}</span></a>
+                                            <div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
+                                            <a href="#" class="btn add-to-cart">Add To Cart</a>
+                                        </div>
                                     </div>
-                                    @endforeach
-                                    <div class="product-info">
-                                        <a href="/ProductDetails/{{$product->slug}}" class="product-name"><span>{{ $product->title }}</span></a>
-                                        <div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
-                                        <a href="#" class="btn add-to-cart">Add To Cart</a>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                         </ul>
 
@@ -131,12 +131,18 @@
                                         <li class="category-item"><a href="#" class="cate-link">Smart TV</a></li>
                                     </ul>
                                 </li>
-                                @foreach(App\Models\CategoryModel::orderby('id','asc')->get() as $category)
                                 <li class="category-item">
-                                    <a href="#" class="cate-link">{{$category->category_name}}</a>
+                                    <a href="#" class="cate-link">Smartphone & Tablets</a>
                                 </li>
-                                @endforeach
-
+                                <li class="category-item">
+                                    <a href="#" class="cate-link">Fashion Clothings</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="#" class="cate-link">Kid’s Toys</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="#" class="cate-link">Smart Watch</a>
+                                </li>
                             </ul>
                         </div>
                     </div><!-- Categories widget-->

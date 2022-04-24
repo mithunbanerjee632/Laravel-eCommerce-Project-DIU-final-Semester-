@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryModelController;
 use App\Http\Controllers\ReturnPolicyController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,10 @@ use App\Http\Controllers\TermsConditionController;
     return view('Home');
 });*/
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
+
+
 Route::get('/',[HomeController::class,'HomePage']);
 Route::get('/ShopPage',[ShopController::class,'ShopPage']);
 Route::get('/RegistrationPage',[RegisterController::class,'RegistrationPage']);
@@ -43,3 +48,11 @@ Route::get('/AboutPage',[AboutController::class,'AboutPage']);
 Route::get('/PrivacyPage',[PrivacyPolicyController::class,'PrivacyPage']);
 Route::get('/TermsConditionPage',[TermsConditionController::class,'TermsConditionPage']);
 
+//Products
+Route::get('/ProductDetails/{slug}',[DetailsController::class,'ProductDetails']);
+//Search Products
+Route::get('/search',[ShopController::class,'Search'])->name('search');
+
+//category
+/*Route::get('/categories',[CategoryModelController::class,'Category']);*/
+/*Route::get('/allCategories',[ShopController::class,'AllCategories']);*/

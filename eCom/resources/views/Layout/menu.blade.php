@@ -15,7 +15,7 @@
                     <div class="topbar-menu left-menu">
                         <ul>
                             <li class="menu-item" >
-                                <a title="Hotline: (+123) 456 789" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
+                                <a title="Hotline:01713574869" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: 01713574869</a>
                             </li>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@
 
                     <div class="wrap-search center-section">
                         <div class="wrap-search-form">
-                            <form action="#" id="form-search-top" name="form-search-top">
+                            <form action="{{route('search')}}" id="form-search-top" name="form-search-top" method="get">
                                     <input type="text" name="search" value="" placeholder="Search here..."/>
 
                                 <button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -69,22 +69,10 @@
                                     <a href="#" class="link-control">All Category</a>
                                     <ul class="list-cate">
                                         <li class="level-0">All Category</li>
-                                        <li class="level-1">-Electronics</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Headphone & Headsets</li>
-                                        <li class="level-2">Mp3 Player & Acessories</li>
-                                        <li class="level-1">-Smartphone & Table</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Mp3 Player & Headphones</li>
-                                        <li class="level-2">Table & Accessories</li>
-                                        <li class="level-1">-Electronics</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Headphone & Headsets</li>
-                                        <li class="level-2">Mp3 Player & Acessories</li>
-                                        <li class="level-1">-Smartphone & Table</li>
-                                        <li class="level-2">Batteries & Chargens</li>
-                                        <li class="level-2">Mp3 Player & Headphones</li>
-                                        <li class="level-2">Table & Accessories</li>
+                                        @foreach(App\Models\CategoryModel::orderby('id','asc')->get() as $category)
+                                        <li class="level-1">{{$category->category_name}}</li>
+                                        @endforeach
+
                                     </ul>
                                 </div>
                             </form>
