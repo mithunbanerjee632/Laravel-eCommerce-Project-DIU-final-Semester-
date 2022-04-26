@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class TermsConditionController extends Controller
 {
     function TermsConditionPage(){
-        return view('TermsCondition');
+        return view('Frontend.Pages.TermsCondition');
     }
 }

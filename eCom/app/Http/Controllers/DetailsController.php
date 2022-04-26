@@ -18,7 +18,7 @@ class DetailsController extends Controller
         $products = ProductModel::where('slug',$slug)->get();
 
         if(!is_null($products)){
-            return view('Details')->with('products',$products);
+            return view('Frontend.Pages.Details')->with('products',$products);
         }else{
             Session()->flash('error','Sorry! there is no Product by this url...');
             return redirect('/ShopPage');

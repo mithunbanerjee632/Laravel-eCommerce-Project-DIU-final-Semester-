@@ -12,7 +12,7 @@ class ShopController extends Controller
    function ShopPage(){
 
        $products = ProductModel::orderby('id','desc')->get();
-       return view('Shop',['products'=>$products])/*->with('products',$products)*/;
+       return view('Frontend.Shop.Shop',['products'=>$products])/*->with('products',$products)*/;
 
       /* $products = json_decode( $products = ProductModel::orderby('id','desc')->get());
        return view('Shop',['products'=>$products]);*/
@@ -26,7 +26,7 @@ class ShopController extends Controller
            ->orWhere('price','like','%'.$search.'%')
            ->orderby('id','desc')
            ->paginate(9);
-       return view('Search',compact('search','products'));
+       return view('Frontend.Pages.Search',compact('search','products'));
 
    }
 

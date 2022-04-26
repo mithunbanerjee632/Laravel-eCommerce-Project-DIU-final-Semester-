@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
    function CartPage(){
-       return view('Cart');
+       return view('Frontend.Pages.Cart');
    }
 }

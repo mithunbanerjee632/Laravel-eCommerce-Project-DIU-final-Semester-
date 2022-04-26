@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class CheckoutController extends Controller
 {
    function CheckoutPage(){
-       return view('Checkout');
+       return view('Frontend.Pages.Checkout');
    }
 }

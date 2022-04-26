@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class PrivacyPolicyController extends Controller
 {
     function PrivacyPage(){
-        return view('PrivacyPolicy');
+        return view('Frontend.Pages.PrivacyPolicy');
     }
 }

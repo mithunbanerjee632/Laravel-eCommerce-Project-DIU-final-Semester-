@@ -19,4 +19,12 @@ class ProductModel extends Model
     function images(){
         return $this->hasMany(ProductImage::class,'product_id');
     }
+
+    function category(){
+        return $this->belongsTo(CategoryModel::class);
+    }
+
+    function brand(){
+        return $this->belongsTo(ProductModel::class);
+    }
 }

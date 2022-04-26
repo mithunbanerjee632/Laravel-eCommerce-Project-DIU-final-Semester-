@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     function ContactPage(){
-        return view('Contact');
+        return view('Frontend.Pages.Contact');
     }
 }

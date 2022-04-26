@@ -13,4 +13,8 @@ class CategoryModel extends Model
     public $incrementing=true;
     public $keyType='int';
     public $timestamps=true;
+
+    function products(){
+        return $this->hasMany(ProductModel::class);
+    }
 }

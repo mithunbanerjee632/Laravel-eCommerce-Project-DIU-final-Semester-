@@ -111,6 +111,7 @@
       <path value="$PROJECT_DIR$/eCom/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/eCom/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/eCom/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/eCom/vendor/rap2hpoutre/laravel-log-viewer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

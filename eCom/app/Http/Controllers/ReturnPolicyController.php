@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ReturnPolicyController extends Controller
 {
    function ReturnPolicyPage(){
-       return view('ReturnPolicy');
+       return view('Frontend.Pages.ReturnPolicy');
    }
 }

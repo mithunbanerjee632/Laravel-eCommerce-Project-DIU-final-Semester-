@@ -17,7 +17,7 @@ class HomeController extends Controller
 
 
         $products = ProductModel::orderby('id','asc')->limit(6)->get();
-        return view('Home',['products'=>$products])/*->with('products',$products)*/;
+        return view('Frontend.Pages.Home',['products'=>$products])/*->with('products',$products)*/;
 
         /*$SalesData = json_decode(ProductModel::orderby('id','desc')->get());
         return view('Home',['SalesData'=>$SalesData]);*/

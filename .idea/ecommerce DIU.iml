@@ -117,6 +117,7 @@
       <excludeFolder url="file://$MODULE_DIR$/eCom/vendor/phpoption/phpoption" />
       <excludeFolder url="file://$MODULE_DIR$/eCom/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/eCom/vendor/phpspec/prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/eCom/vendor/rap2hpoutre/laravel-log-viewer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
