@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\ProductModel;
-use App\Models\CategoryModel;
-use App\Models\BrandModel;
+use function redirect;
+use function session;
+use function view;
 
 
 class DetailsController extends Controller

@@ -14,7 +14,78 @@
                     <li class="item-link"><span>login</span></li>
                 </ul>
             </div>
+
             <div class=" main-content-area">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Product Title</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Quantity</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Sub Total Price</th>
+                        <th scope="col"> Delete</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @php
+                    $total_price =0;
+                    @endphp
+                       @foreach(App\Models\Cart::totalCarts() as $cart)
+                           <tr >
+                               <th scope="row">{{$loop->index +1}}</th>
+                               <td>
+                                   <a href="/ProductDetails/{{$cart->product->slug}}">{{$cart->product->title}}</a>
+                               </td>
+                               <td>
+                                   @if($cart->product->images->count()>0)
+                                     <img src="{{asset($cart->product->images->first()->image)}}" width="60px">
+                                   @endif
+                               </td>
+                               <td>
+                                   <form class="form-inline" action="{{ route('carts.update',$cart->id) }}" method="post">
+                                       @csrf
+                                       <input type="number" name="product_quantity" class="form-control" value="{{$cart->product_quantity}}">
+                                       <button type="submit" class="btn btn-success ml-2">Update</button>
+                                   </form>
+                               </td>
+
+                               <td>
+                                   {{$cart->product->price}} Taka
+                               </td>
+
+                               <td>
+                                   @php
+                                       $total_price +=  $cart->product->price * $cart->product_quantity
+                                   @endphp
+                                   {{$cart->product->price * $cart->product_quantity}} Taka
+                               </td>
+
+                               <td>
+                                   <form class="form-inline" action="{{route('carts.delete',$cart->id)}}" method="post">
+                                       @csrf
+                                       <input type="hidden" name="cart_id" class="form-control">
+                                       <button type="submit" class="btn btn-delete">  <i class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                   </form>
+                               </td>
+                           </tr>
+
+                       @endforeach
+                       <tr >
+                           <td colspan="4"></td>
+                           <td>Total Amount:</td>
+                           <td colspan="2">
+                               <strong>{{$total_price}}</strong>.
+                           </td>
+                       </tr>
+                    <>
+
+                    </tbody>
+                </table>
+            </div>
+     {{--       <div class=" main-content-area">
 
                 <div class="wrap-iten-in-cart">
                     <h3 class="box-title">Products Name</h3>
@@ -67,24 +138,24 @@
                         </li>
                     </ul>
                 </div>
-
+--}}
                 <div class="summary">
                     <div class="order-summary">
                         <h4 class="title-box">Order Summary</h4>
-                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">$512.00</b></p>
+                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}}</b></p>
                         <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                        <p class="summary-info total-info "><span class="title">Total</span><b class="index">$512.00</b></p>
+                        <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{$total_price}}</b></p>
                     </div>
                     <div class="checkout-info">
                         <label class="checkbox-field">
                             <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
                         </label>
-                        <a class="btn btn-checkout" href="checkout.html">Check out</a>
-                        <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a class="btn btn-checkout" href="{{url('/CheckoutPage')}}">Check out</a>
+                        <a class="link-to-shop" href="{{url('/ShopPage')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                     <div class="update-clear">
-                        <a class="btn btn-clear" href="#">Clear Shopping Cart</a>
-                        <a class="btn btn-update" href="#">Update Shopping Cart</a>
+                        <a class="btn btn-clear" href="/carts/update/{{$cart->id}}">Clear Shopping Cart</a>
+                        <a class="btn btn-update" href="{{url('/carts/delete/{id}',$cart->id)}}">Update Shopping Cart</a>
                     </div>
                 </div>
 

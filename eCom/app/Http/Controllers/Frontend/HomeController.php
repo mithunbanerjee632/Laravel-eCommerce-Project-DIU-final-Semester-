@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\ProductModel;
-use Illuminate\Http\Request;
 use App\Models\VisitorModel;
+use function view;
 
 class HomeController extends Controller
 {

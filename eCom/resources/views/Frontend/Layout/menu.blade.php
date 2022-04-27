@@ -21,17 +21,14 @@
                     </div>
 
 
-                    
+
                        <div class="topbar-menu right-menu">
-                        <ul> 
+                        <ul>
 
                    @if (Route::has('login'))
 
-
                         @auth
 
-
-                                      
                          <li class="menu-item menu-item-has-children parent" >
 
                         <a title="Register or Login" href="#">
@@ -49,24 +46,24 @@
                     </form>
                     </ul>
                 </li>
-   
-                                   
+
+
                 @else
-                  
+
                     <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
 
 
                     @if (Route::has('register'))
-                     
+
 
                         <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
                     @endif
                 @endauth
-           
+
         @endif
-                             
-                      
-                    
+
+
+
 
                     <li class="menu-item lang-menu menu-item-has-children parent">
                         <a title="English" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -91,7 +88,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul> 
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -135,10 +132,10 @@
                             </a>
                         </div>
                         <div class="wrap-icon-section minicart">
-                            <a href="#" class="link-direction">
+                            <a href="{{url('/CartPage')}}" class="link-direction">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <div class="left-info">
-                                    <span class="index">4 items</span>
+                                    <span class="index">{{App\Models\Cart::totalItems()}} items</span>
                                     <span class="title">CART</span>
                                 </div>
                             </a>
