@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.ico')}}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
@@ -26,7 +25,12 @@
 @yield('content')
 
 
+
+
+
 @include('Frontend.Layout.footer')
+
+
 
 
 
@@ -45,6 +49,7 @@
 <script src="{{asset('js/jquery.countdown.min.js')}}"></script>
 <script src="{{asset('js/jquery.sticky.js')}}"></script>
 <script src="{{asset('js/functions.js')}}"></script>
+@yield('script')
 {{--<script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/custom.js')}}"></script>--}}
 </body>

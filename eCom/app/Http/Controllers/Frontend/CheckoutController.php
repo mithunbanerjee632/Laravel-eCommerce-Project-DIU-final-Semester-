@@ -19,6 +19,10 @@ class CheckoutController extends Controller
        return view('Frontend.Pages.Checkout',compact('user','divisions','districts','payments'));
    }
 
+   function CheckoutStore(){
+
+   }
+
 
  /*  function CheckoutForm(){
         $divisions =Division::orderby('priority','asc')->get();

@@ -6,30 +6,27 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card-header text-center">
-                    <h4>Shipping Address</h4>
+                    <h4>Shipping Address</h4><hr><hr>
                 </div>
                 <div class="card card-body">
 
-                    <form method="POST" name="frm-billing" action="{{--{{ route('users.profile.update') }}--}}" >
+                    <form method="POST" name="frm-billing" action="{{ route('checkouts.store') }}" >
                         @csrf
 
                         <div class="form-group">
-                            <label for="first_name" :value="__('First Name')">First Name</label>
-                            <input id="first_name" class="form-control" type="text" name="first_name" value="{{Auth::check()?Auth::user()->first_name:''}}" required autofocus>
+                            <label for="name" :value="__('Full Name')">Full Name</label>
+                            <input id="name" class="form-control" type="text" name="name" value="{{Auth::check()?Auth::user()->first_name.' '.Auth::user()->last_name:''}}" required autofocus>
 
                         </div>
 
 
-                        <div class="form-group">
+                    {{--    <div class="form-group">
                             <label for="last_name" :value="__('last Name')">Last Name</label>
-                            <input id="last_name" class="form-control" type="text" name="last_name" value="{{Auth::check()?Auth::user()->last_name:''}}" required autofocus>
+                            <input id="last_name" class="form-control" type="text" name="last_name" value="{{Auth::check()?Auth::user()->last_name:''}}">
 
-                        </div>
+                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="username" :value="__('Username')">Username</label>
-                            <input id="username" class="form-control" type="text" name="username" value="{{Auth::check()?Auth::user()->username:''}}" required>
-                        </div>
+
 
                         <div class="form-group">
                             <label  for="email" :value="__('Email')">Email Address</label>
@@ -37,17 +34,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label  for="phone_no" :value="__('Phone Number')">Phone Number</label>
+                            <label  for="phone_no" :value="__('Phone Number')">Phone Number<span>*</span></label>
                             <input id="phone_no" class="form-control" type="text" name="phone_no" value="{{Auth::check()?Auth::user()->phone_no:''}}" required autofocus>
                         </div>
 
                         <div class="form-group">
-                            <label for="street_address">Street Address</label>
-                            <textarea class="form-control" id="street_address" rows="3"></textarea>
-                        </div>
+                            <label for="shipping_address">Street Address<span>*</span></label>
+                            <textarea class="form-control" id="shipping_address" rows="3" required autofocus></textarea>
+                        </div>{{-- <div class="form-group">
+                            <label for="username" :value="__('Username')">Username</label>
+                            <input id="username" class="form-control" type="text" name="username" value="{{Auth::check()?Auth::user()->username:''}}" >
+                        </div>--}}
 
                         <div class="form-group mt-2">
-                            <label for="division_id" >Division</label>
+                            <label for="division_id" >Division<span>*</span></label>
                             <select class="form-control" name="division_id">
 
                                 <option value="">please select your division</option>
@@ -61,7 +61,7 @@
 
 
                         <div class="form-group mt-2">
-                            <label for="district_id" >District</label>
+                            <label for="district_id" >District<span>*</span></label>
                             <select class="form-control" name="district_id">
 
                                 <option value="">please select your District</option>
@@ -75,51 +75,77 @@
 
 
                         <div class="form-group">
-                            <label for="zipcode">ZIPcode /Post:</label>
+                            <label for="zipcode">ZIPcode /Post:<span>*</span></label>
                             <input id="zipcode" type="number" class="form-control" name="zipcode" value="" placeholder="Your postal code" required>
                         </div>
 
                         <div class="form-group">
+                            <label for="message">Message(Optional)</label>
+                            <textarea class="form-control" id="message" rows="3" required autofocus></textarea>
+                        </div>
+
+                    {{--    <div class="form-group">
 
                             <label for="country">Country:</label>
                             <input id="country" type="text" class="form-control" name="country" value="" placeholder="Bangladesh">
                         </div>
-
+--}}
                         <hr/>
                         <div class="form-group">
                             {{--<h2 class="text-center">Payment</h2>--}}
 
                             <label class="" for="district_id" >Please Select a Payment Method:</label>
-                            <select class="form-control mt-3" name="payment_method_id required" id="payments">
+                            <select class="form-control mt-3" name="payment_method_id" id="payments"  required>
                                 <option value="">Please Select a Payment Method</option>
                                @foreach($payments as $payment)
-                                <option value="{{$payment->id}}">{{$payment->name}}</option>
+                                <option value="{{$payment->short_name}}">{{$payment->name}}</option>
                                 @endforeach
                             </select>
 
                             @foreach($payments as $payment)
-                                <div class="hidden" id="payment-{{$payment->short_name}}">
-                                    @if($payment->shortname == 'cash_in')
-                                    <div>
-                                        <h3>
-                                            For Cash In there is nothing necessary.Jush Finish the order
-                                        </h3>
+
+                                <div class=" alert-success text-center m-3" >
+
+
+                                    @if($payment->short_name == 'cash_in')
+                                        <div class="hidden alert alert-success p-2"   id="payment_{{$payment->short_name}}">
+                                            <h4> For Cash In there is nothing necessary.Just click Order Now and  Finish the order.</h4><hr>
+
                                         <br>
-                                        <small>You Will get your product into three or five business days</small>
+                                        <p>You Will get your product into three or five business days</p>
+
                                     </div>
                                     @else
+                                        <div class="hidden alert alert-success p-2"   id="payment_{{$payment->short_name}}">
+                                            <h3 class="mt-2">{{$payment->name}} Payment</h3>
+                                            <p>
+                                                <strong>{{$payment->name}} No: {{$payment->no}}</strong>
+                                                <br>
+                                                <strong>Account Type: {{$payment->type}}</strong>
+                                            </p>
+                                            <hr>
+                                            <div class="text-center alert aler-success mb-2">
+                                                <p>Please Send the above money to the bkash number and write your transaction id</p>
+                                            </div>
+
+                                            <input type="text" class="form-control " name="transaction_id" placeholder="Enter Transaction Id"/>
+
+                                        </div>
 
                                         @endif
 
-                                </div>
 
+                                </div>
                                 @endforeach
+
+
                         </div>
 
 
 
 
-                        <div class="form-group row mb-0 text-center ml-5">
+
+                        <div class="form-group row mb-0 text-center ml-5 mt-3">
                             <div class=" offset-md-4 ">
                                 <button type="submit" class="btn btn-danger">
                                     Order Now
@@ -140,7 +166,7 @@
             <div class="col-md-5">
                 <div class="card card-body text-center">
                     <h4>Confirm Items</h4>
-                    <hr/>
+                    <hr/><hr/>
                    {{-- @foreach(App\Models\Cart::totalCarts() as $cart)
                         <p>
                             {{$cart->product->title}}-
@@ -233,124 +259,7 @@
         </div>
     </div>
 
-    {{--<main id="main" class="main-site">
 
-        <div class="container">
-
-            <div class="wrap-breadcrumb">
-                <ul>
-                    <li class="item-link"><a href="{{url('/')}}" class="link">home</a></li>
-                    <li class="item-link"><a href="{{ route('login') }}" class="link">login</a></li>
-                </ul>
-            </div>
-            <div class=" main-content-area">
-                <div class="wrap-address-billing">
-                    <h3 class="box-title">Shipping Address</h3>
-                    <form action="#" method="post" name="frm-billing">
-                        @csrf
-                        <p class="row-in-form">
-                            <label for="fname">First Name<span>*</span></label>
-                            <input id="fast_name" type="text" name="first_name" value="" placeholder="Your name">
-                        </p>
-                        <p class="row-in-form">
-                            <label for="lname">Last Name<span>*</span></label>
-                            <input id="last_name" type="text" name="last_name" value="" placeholder="Your last name">
-                        </p>
-                        <p class="row-in-form">
-                            <label for="email">Email Addreess:</label>
-                            <input id="email" type="email" name="email" value="" placeholder="Type your email">
-                        </p>
-                        <p class="row-in-form">
-                            <label for="phone">Phone number<span>*</span></label>
-                            <input id="phone_no" type="number" name="phone_no" value="" placeholder="11 digits format">
-                        </p>
-                        <p class="row-in-form">
-                            <label for="add">Address:</label>
-                            <input id="adddress" type="text" name="address" value="" placeholder="Street at apartment number">
-                        </p>
-                        <p class="row-in-form">
-                            <label for="city">Town / City<span>*</span></label>
-                            <input id="city" type="text" name="city" value="" placeholder="City name">
-                        </p>
-
-                            <div class="form-group">
-                                <label for="division_id" class="col-md-4 col-form-label text-md-right">
-                                    <select class="form-control" name="division_id">
-                                        <option value="please select your division"></option>
-                                      --}}{{--  @foreach($divisions as $division)
-                                        <option value="{{$division->id}}">{{$division->name}}</option>
-                                        @endforeach--}}{{--
-
-                                    </select>
-                                </label>
-                            </div>
-                         --}}{{--<p class="row-in-form">
-                            <label for="city">Division<span>*</span></label>
-                            <input id="city" type="text" name="division" value="" placeholder="Division name">
-                        </p>--}}{{--
-
-
-                        <p class="row-in-form">
-                            <label for="zip-code">Postcode / ZIP:</label>
-                            <input id="zip-code" type="number" name="zip-code" value="" placeholder="Your postal code">
-                        </p>
-
-
-                        <p class="row-in-form">
-                            <label for="country">Country<span>*</span></label>
-                            <input id="country" type="text" name="country" value="" placeholder="Bangladesh">
-                        </p>
-
-                        <p class="row-in-form fill-wife">
-                            <label class="checkbox-field">
-                                <input name="create-account" id="create-account" value="forever" type="checkbox">
-                                <span>Create an account?</span>
-                            </label>
-                            <label class="checkbox-field">
-                                <input name="different-add" id="different-add" value="forever" type="checkbox">
-                                <span>Ship to a different address?</span>
-                            </label>
-                        </p>
-                    </form>
-                </div>--}}
-              {{--  <div class="summary summary-checkout">
-                    <div class="summary-item payment-method">
-                        <h4 class="title-box">Payment Method</h4>
-                        <p class="summary-info"><span class="title">Check / Money order</span></p>
-                        <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
-                        <div class="choose-payment-methods">
-                            <label class="payment-method">
-                                <input name="payment-method" id="payment-method-bank" value="bank" type="radio">
-                                <span>Direct Bank Transder</span>
-                                <span class="payment-desc">But the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</span>
-                            </label>
-                            <label class="payment-method">
-                                <input name="payment-method" id="payment-method-visa" value="visa" type="radio">
-                                <span>visa</span>
-                                <span class="payment-desc">There are many variations of passages of Lorem Ipsum available</span>
-                            </label>
-                            <label class="payment-method">
-                                <input name="payment-method" id="payment-method-paypal" value="paypal" type="radio">
-                                <span>Paypal</span>
-                                <span class="payment-desc">You can pay with your credit</span>
-                                <span class="payment-desc">card if you don't have a paypal account</span>
-                            </label>
-                        </div>
-                        <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">$100.00</span></p>
-                        <a href="thankyou.html" class="btn btn-medium">Place order now</a>
-                    </div>
-                    <div class="summary-item shipping-method">
-                        <h4 class="title-box f-title">Shipping method</h4>
-                        <p class="summary-info"><span class="title">Flat Rate</span></p>
-                        <p class="summary-info"><span class="title">Fixed $50.00</span></p>
-                        <h4 class="title-box">Discount Codes</h4>
-                        <p class="row-in-form">
-                            <label for="coupon-code">Enter Your Coupon code:</label>
-                            <input id="coupon-code" type="text" name="coupon-code" value="" placeholder="">
-                        </p>
-                        <a href="#" class="btn btn-small">Apply</a>
-                    </div>
-                </div>--}}
 
                 <div class="wrap-show-advance-info-box style-1 box-in-site">
                     <h3 class="title-box">Most Viewed Products</h3>
@@ -511,8 +420,21 @@
 
 @section('script')
     <script type="text/javascript">
-        $().change(function(){
+        $('#payments').change(function() {
+            $payment_method = $('#payments').val();
 
+            if ($payment_method == 'cash_in') {
+                $('#payment_cash_in').removeClass('hidden')
+                $('#payment_bkash').addClass('hidden')
+                $('#payment_rocket').addClass('hidden')
+            } else if ($payment_method == 'bkash') {
+                $('#payment_bkash').removeClass('hidden')
+                $('#payment_cash_in').addClass('hidden')
+                $('#payment_rocket').addClass('hidden')
+            } else if ($payment_method == 'rocket') {
+                $('#payment_rocket').removeClass('hidden')
+                $('#payment_bkash').addClass('hidden')
+            }
         });
     </script>
 
