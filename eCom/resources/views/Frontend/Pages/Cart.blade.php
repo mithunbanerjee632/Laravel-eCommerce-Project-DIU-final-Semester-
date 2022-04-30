@@ -58,7 +58,7 @@
 
                                <td>
                                    @php
-                                       $total_price +=  $cart->product->price * $cart->product_quantity
+                                       $total_price +=  $cart->product->price * $cart->product_quantity;
                                    @endphp
                                    {{$cart->product->price * $cart->product_quantity}} Taka
                                </td>
@@ -80,10 +80,15 @@
                                <strong>{{$total_price}}</strong>.
                            </td>
                        </tr>
-                    <>
+
 
                     </tbody>
                 </table>
+
+              {{--  <div class="pull-right mt-5">
+                    <a href="{{url('/ShopPage')}}" class="btn btn-info btn-lg ">Continue Shopping...</a>
+                    <a href="{{route('checkouts')}}" class="btn btn-danger btn-lg ">Checkout</a>
+                </div>--}}
             </div>
      {{--       <div class=" main-content-area">
 
@@ -143,19 +148,19 @@
                     <div class="order-summary">
                         <h4 class="title-box">Order Summary</h4>
                         <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}}</b></p>
-                        <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                        <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{$total_price}}</b></p>
+                        <p class="summary-info"><span class="title">Shipping Cost</span><b class="index">{{App\Models\Setting::first()->shipping_caust}}</b></p>
+                        <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{ $total_price +App\Models\Setting::first()->shipping_caust}}</b></p>
                     </div>
                     <div class="checkout-info">
                         <label class="checkbox-field">
                             <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
                         </label>
-                        <a class="btn btn-checkout" href="{{url('/CheckoutPage')}}">Check out</a>
-                        <a class="link-to-shop" href="{{url('/ShopPage')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a class="btn btn-checkout" href="{{route('checkouts')}}">Check out</a>
+                        <a class="link-to-shop btn btn-lg btn-info" href="{{url('/ShopPage')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                     <div class="update-clear">
-                        <a class="btn btn-clear" href="/carts/update/{{$cart->id}}">Clear Shopping Cart</a>
-                        <a class="btn btn-update" href="{{url('/carts/delete/{id}',$cart->id)}}">Update Shopping Cart</a>
+                        <a class="btn btn-clear" href="{{--/carts/update/{{$cart->id}}--}}">Clear Shopping Cart</a>
+                        <a class="btn btn-update" href="{{--{{url('/carts/delete/{id}',$cart->id)}}--}}">Update Shopping Cart</a>
                     </div>
                 </div>
 

@@ -31,17 +31,23 @@
 
                          <li class="menu-item menu-item-has-children parent" >
 
+
+
                         <a title="Register or Login" href="#">
                             <img src="{{App\Helpers\ImageHelper::getUserImage( Auth::user()->id )}}" style="width:20px;" class="img rounded-circle">
-                            {{ Auth::user()->name }}
+
+                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                             <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 
                         <ul class="submenu curency" >
                             <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <li class="menu-item" >
+
                             <a title="Register or Login" href="route('logout')" onclick="event.preventDefault();
                                 this.closest('form').submit();">{{ __('Log Out') }}</a>
+
+                            <a class="mt-1" title="Register or Login" href="{{route('users.dashboard')}}">My Dashboard</a>
                         </li>
                     </form>
                     </ul>
@@ -181,7 +187,7 @@
                                 <a href="{{url('/CartPage')}}" class="link-term mercado-item-title">Cart</a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{url('/CheckoutPage')}}" class="link-term mercado-item-title">Checkout</a>
+                                <a href="{{route('checkouts')}}" class="link-term mercado-item-title">Checkout</a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{url('/ContactPage')}}" class="link-term mercado-item-title">Contact Us</a>
