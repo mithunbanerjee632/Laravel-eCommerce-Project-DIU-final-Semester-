@@ -20,6 +20,12 @@
                         </div>
 
 
+
+                            <input id="user_id" class="form-control hidden" type="text" name="user_id" value="{{Auth::check()?Auth::user()->id:''}}" required autofocus>
+
+
+
+
                     {{--    <div class="form-group">
                             <label for="last_name" :value="__('last Name')">Last Name</label>
                             <input id="last_name" class="form-control" type="text" name="last_name" value="{{Auth::check()?Auth::user()->last_name:''}}">
@@ -40,15 +46,17 @@
 
                         <div class="form-group">
                             <label for="shipping_address">Street Address<span>*</span></label>
-                            <textarea class="form-control" id="shipping_address" rows="3" required autofocus></textarea>
-                        </div>{{-- <div class="form-group">
+                            <textarea class="form-control" name = "shipping_address" id="shipping_address" rows="3" required autofocus></textarea>
+                        </div>
+{{-- <div class="form-group">
                             <label for="username" :value="__('Username')">Username</label>
                             <input id="username" class="form-control" type="text" name="username" value="{{Auth::check()?Auth::user()->username:''}}" >
                         </div>--}}
 
+
                         <div class="form-group mt-2">
                             <label for="division_id" >Division<span>*</span></label>
-                            <select class="form-control" name="division_id">
+                            <select class="form-control" name="division_id" required>
 
                                 <option value="">please select your division</option>
                                 @foreach($divisions as $division)
@@ -62,7 +70,7 @@
 
                         <div class="form-group mt-2">
                             <label for="district_id" >District<span>*</span></label>
-                            <select class="form-control" name="district_id">
+                            <select class="form-control" name="district_id" required>
 
                                 <option value="">please select your District</option>
                                 @foreach($districts as $district)
@@ -81,18 +89,22 @@
 
                         <div class="form-group">
                             <label for="message">Message(Optional)</label>
-                            <textarea class="form-control" id="message" rows="3" required autofocus></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="3" ></textarea>
                         </div>
 
-                    {{--    <div class="form-group">
+
+{{--    <div class="form-group">
 
                             <label for="country">Country:</label>
                             <input id="country" type="text" class="form-control" name="country" value="" placeholder="Bangladesh">
                         </div>
 --}}
+
                         <hr/>
                         <div class="form-group">
-                            {{--<h2 class="text-center">Payment</h2>--}}
+
+{{--<h2 class="text-center">Payment</h2>--}}
+
 
                             <label class="" for="district_id" >Please Select a Payment Method:</label>
                             <select class="form-control mt-3" name="payment_method_id" id="payments"  required>
@@ -128,21 +140,14 @@
                                                 <p>Please Send the above money to the bkash number and write your transaction id</p>
                                             </div>
 
-                                            <input type="text" class="form-control " name="transaction_id" placeholder="Enter Transaction Id"/>
 
                                         </div>
 
                                         @endif
-
-
                                 </div>
                                 @endforeach
-
-
+                            <input type="text" class="form-control hidden alert alert-success" id="transaction_id" name="transaction_id" placeholder="Enter Transaction Id"/>
                         </div>
-
-
-
 
 
                         <div class="form-group row mb-0 text-center ml-5 mt-3">
@@ -427,13 +432,17 @@
                 $('#payment_cash_in').removeClass('hidden')
                 $('#payment_bkash').addClass('hidden')
                 $('#payment_rocket').addClass('hidden')
+
             } else if ($payment_method == 'bkash') {
                 $('#payment_bkash').removeClass('hidden')
                 $('#payment_cash_in').addClass('hidden')
                 $('#payment_rocket').addClass('hidden')
+                $('#transaction_id').removeClass('hidden')
             } else if ($payment_method == 'rocket') {
                 $('#payment_rocket').removeClass('hidden')
                 $('#payment_bkash').addClass('hidden')
+                $('#transaction_id').removeClass('hidden')
+                $('#payment_cash_in').addClass('hidden')
             }
         });
     </script>

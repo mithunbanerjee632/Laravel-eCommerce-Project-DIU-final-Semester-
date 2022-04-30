@@ -1,5 +1,7 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
+//Frontend
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CategoryModelController;
@@ -16,7 +18,15 @@ use App\Http\Controllers\Frontend\ReturnPolicyController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\TermsConditionController;
 use App\Http\Controllers\Frontend\UserController;
-use Illuminate\Support\Facades\Route;
+//backend
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DistrictControllers;
+use App\Http\Controllers\Backend\DivisionControllers;
+use App\Http\Controllers\Backend\HomeControllers;
+use App\Http\Controllers\Backend\ProductController;
+
 
 
 /*
@@ -137,3 +147,54 @@ Route::group(['prefix'=>'/districts'],function(){
     Route::get('/district/edit/{id}', [DistrictController::class,'update'])->name('admin.district.update');
     Route::get('/district/delete/{id}', [DistrictController::class,'delete'])->name('admin.district.delete');
 });
+
+
+
+
+
+//Backend
+Route::get('/admin/dashboard', [AdminController::class,'AdminDashboard'])->name('admin.dashboard');
+Route::get('/admin/login', [AdminController::class,'AdminLogin'])->name('admin.login.form');
+
+Route::get('/', [HomeControllers::class,'HomeIndex']);
+//Products Management
+Route::get('/products', [ProductController::class,'ProductIndex']);
+Route::get('/getProductsData', [ProductController::class,'ProductsData']);
+Route::post('/ProductAdd', [ProductController::class,'ProductAdd']);
+Route::post('/PorductDetails', [ProductController::class,'ProductDetails']);
+Route::post('/UpdateProductDetails', [ProductController::class,'UpdateProduct']);
+Route::post('/ProductDelete', [ProductController::class,'DeleteProduct']);
+
+//Category Management System
+
+Route::get('/category', [CategoryController::class,'CategoryIndex']);
+Route::get('/getCategoryData', [CategoryController::class,'CategoryData']);
+Route::post('/AddCategory', [CategoryController::class,'CategoryAdd']);
+Route::post('/getCategoryDetails', [CategoryController::class,'CategoryDetails']);
+Route::post('/CategoryUpdate', [CategoryController::class,'CategoryUpdate']);
+Route::post('/DeleteCategory', [CategoryController::class,'CategoryDelete']);
+
+//Brand Management System
+Route::get('/brand', [BrandController::class,'BrandIndex']);
+Route::get('/getBrandsData', [BrandController::class,'getBrandsData']);
+Route::post('/BrandAdd', [BrandController::class,'BrandAdd']);
+Route::post('/getBrandDetails', [BrandController::class,'BrandDetails']);
+Route::post('/UpdateBrand', [BrandController::class,'BrandUpdate']);
+Route::post('/DeleteBrand', [BrandController::class,'BrandDelete']);
+
+//District Management System
+Route::get('/district', [DistrictControllers::class,'DistrictIndex']);
+Route::get('/getDistrictData', [DistrictControllers::class,'DistrictData']);
+Route::post('/DistrictAdd', [DistrictControllers::class,'DistrictAdd']);
+Route::post('/getDistrictDetails', [DistrictControllers::class,'DistrictDetails']);
+Route::post('/UpdateDistrict', [DistrictControllers::class,'DistrictUpdate']);
+Route::post('/DeleteDistrict', [DistrictControllers::class,'DistrictDelete']);
+
+//Division Management System
+
+Route::get('/division', [DivisionControllers::class,'DivisionIndex']);
+Route::get('/getDivisionsData', [DivisionControllers::class,'DivisionData']);
+Route::post('/DivisionsAdd', [DivisionControllers::class,'DivisionAdd']);
+Route::post('/getDivisionsDetails', [DivisionControllers::class,'DivisionDetails']);
+Route::post('/UpdateDivisions', [DivisionControllers::class,'DivisionUpdate']);
+Route::post('/DeleteDivisions', [DivisionControllers::class,'DivisionDelete']);

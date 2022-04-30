@@ -16,134 +16,90 @@
             </div>
 
             <div class=" main-content-area">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Product Title</th>
-                        <th scope="col">Product Image</th>
-                        <th scope="col">Product Quantity</th>
-                        <th scope="col">Unit Price</th>
-                        <th scope="col">Sub Total Price</th>
-                        <th scope="col"> Delete</th>
+                <h2 class="text-center mb-5">MYCart Items</h2>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                    $total_price =0;
-                    @endphp
-                       @foreach(App\Models\Cart::totalCarts() as $cart)
-                           <tr >
-                               <th scope="row">{{$loop->index +1}}</th>
-                               <td>
-                                   <a href="/ProductDetails/{{$cart->product->slug}}">{{$cart->product->title}}</a>
-                               </td>
-                               <td>
-                                   @if($cart->product->images->count()>0)
-                                     <img src="{{asset($cart->product->images->first()->image)}}" width="60px">
-                                   @endif
-                               </td>
-                               <td>
-                                   <form class="form-inline" action="{{ route('carts.update',$cart->id) }}" method="post">
-                                       @csrf
-                                       <input type="number" name="product_quantity" class="form-control" value="{{$cart->product_quantity}}">
-                                       <button type="submit" class="btn btn-success ml-2">Update</button>
-                                   </form>
-                               </td>
+                @if(App\Models\Cart::totalItems() >0)
 
-                               <td>
-                                   {{$cart->product->price}} Taka
-                               </td>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Product Title</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Product Quantity</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Sub Total Price</th>
+                            <th scope="col"> Delete</th>
 
-                               <td>
-                                   @php
-                                       $total_price +=  $cart->product->price * $cart->product_quantity;
-                                   @endphp
-                                   {{$cart->product->price * $cart->product_quantity}} Taka
-                               </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php
+                            $total_price =0;
+                        @endphp
+                        @foreach(App\Models\Cart::totalCarts() as $cart)
+                            <tr >
+                                <th scope="row">{{$loop->index +1}}</th>
+                                <td>
+                                    <a href="/ProductDetails/{{$cart->product->slug}}">{{$cart->product->title}}</a>
+                                </td>
+                                <td>
+                                    @if($cart->product->images->count()>0)
+                                        <img src="{{asset($cart->product->images->first()->image)}}" width="60px">
+                                    @endif
+                                </td>
+                                <td>
+                                    <form class="form-inline" action="{{ route('carts.update',$cart->id) }}" method="post">
+                                        @csrf
+                                        <input type="number" name="product_quantity" class="form-control" value="{{$cart->product_quantity}}">
+                                        <button type="submit" class="btn btn-success ml-2">Update</button>
+                                    </form>
+                                </td>
 
-                               <td>
-                                   <form class="form-inline" action="{{route('carts.delete',$cart->id)}}" method="post">
-                                       @csrf
-                                       <input type="hidden" name="cart_id" class="form-control">
-                                       <button type="submit" class="btn btn-delete">  <i class="fa fa-times-circle" aria-hidden="true"></i></button>
-                                   </form>
-                               </td>
-                           </tr>
+                                <td>
+                                    {{$cart->product->price}} Taka
+                                </td>
 
-                       @endforeach
-                       <tr >
-                           <td colspan="4"></td>
-                           <td>Total Amount:</td>
-                           <td colspan="2">
-                               <strong>{{$total_price}}</strong>.
-                           </td>
-                       </tr>
+                                <td>
+                                    @php
+                                        $total_price +=  $cart->product->price * $cart->product_quantity;
+                                    @endphp
+                                    {{$cart->product->price * $cart->product_quantity}} Taka
+                                </td>
+
+                                <td>
+                                    <form class="form-inline" action="{{route('carts.delete',$cart->id)}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="cart_id" class="form-control">
+                                        <button type="submit" class="btn btn-delete">  <i class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        @endforeach
+
+                        <tr >
+                            <td colspan="4"></td>
+                            <td>Total Amount:</td>
+                            <td colspan="2">
+                                <strong>{{$total_price}}</strong>.
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    @else
+                    <div class="alert alert-warning">
+                        <strong>There is No cart In Your Items</strong>
+
+                        <br>
+                    </div>
+
+                    @endif
 
 
-                    </tbody>
-                </table>
-
-              {{--  <div class="pull-right mt-5">
-                    <a href="{{url('/ShopPage')}}" class="btn btn-info btn-lg ">Continue Shopping...</a>
-                    <a href="{{route('checkouts')}}" class="btn btn-danger btn-lg ">Checkout</a>
-                </div>--}}
             </div>
-     {{--       <div class=" main-content-area">
 
-                <div class="wrap-iten-in-cart">
-                    <h3 class="box-title">Products Name</h3>
-                    <ul class="products-cart">
-                        <li class="pr-cart-item">
-                            <div class="product-image">
-                                <figure><img src="assets/images/products/digital_18.jpg" alt=""></figure>
-                            </div>
-                            <div class="product-name">
-                                <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                            </div>
-                            <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                            <div class="quantity">
-                                <div class="quantity-input">
-                                    <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
-                                    <a class="btn btn-increase" href="#"></a>
-                                    <a class="btn btn-reduce" href="#"></a>
-                                </div>
-                            </div>
-                            <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                            <div class="delete">
-                                <a href="#" class="btn btn-delete" title="">
-                                    <span>Delete from your cart</span>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="pr-cart-item">
-                            <div class="product-image">
-                                <figure><img src="assets/images/products/digital_20.jpg" alt=""></figure>
-                            </div>
-                            <div class="product-name">
-                                <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker [White]</a>
-                            </div>
-                            <div class="price-field produtc-price"><p class="price">$256.00</p></div>
-                            <div class="quantity">
-                                <div class="quantity-input">
-                                    <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
-                                    <a class="btn btn-increase" href="#"></a>
-                                    <a class="btn btn-reduce" href="#"></a>
-                                </div>
-                            </div>
-                            <div class="price-field sub-total"><p class="price">$256.00</p></div>
-                            <div class="delete">
-                                <a href="#" class="btn btn-delete" title="">
-                                    <span>Delete from your cart</span>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
---}}
                 <div class="summary">
                     <div class="order-summary">
                         <h4 class="title-box">Order Summary</h4>

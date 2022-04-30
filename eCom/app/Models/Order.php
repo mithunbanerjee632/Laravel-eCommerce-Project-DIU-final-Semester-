@@ -11,15 +11,20 @@ class Order extends Model
 
     public  $fillable = [
         'user_id',
+        'payment_id',
         'ip_address',
         'name',
+        'email',
         'phone_no',
         'shipping_address',
-        'email',
+        'division_id',
+        'district_id',
+        'zipcode',
         'message',
         'is_paid',
         'is_completed',
         'is_seen_by_admin',
+        'transaction_id',
 
     ];
 
