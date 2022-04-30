@@ -90,13 +90,33 @@
                             {{--<h2 class="text-center">Payment</h2>--}}
 
                             <label class="" for="district_id" >Please Select a Payment Method:</label>
-                            <select class="form-control mt-3" name="payment_method_id required">
+                            <select class="form-control mt-3" name="payment_method_id required" id="payments">
                                 <option value="">Please Select a Payment Method</option>
                                @foreach($payments as $payment)
                                 <option value="{{$payment->id}}">{{$payment->name}}</option>
                                 @endforeach
                             </select>
+
+                            @foreach($payments as $payment)
+                                <div class="hidden" id="payment-{{$payment->short_name}}">
+                                    @if($payment->shortname == 'cash_in')
+                                    <div>
+                                        <h3>
+                                            For Cash In there is nothing necessary.Jush Finish the order
+                                        </h3>
+                                        <br>
+                                        <small>You Will get your product into three or five business days</small>
+                                    </div>
+                                    @else
+
+                                        @endif
+
+                                </div>
+
+                                @endforeach
                         </div>
+
+
 
 
                         <div class="form-group row mb-0 text-center ml-5">
