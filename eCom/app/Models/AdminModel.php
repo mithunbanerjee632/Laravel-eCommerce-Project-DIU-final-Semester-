@@ -4,13 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminModel extends Model
+class AdminModel extends Authenticatable
 {
     use HasFactory;
-    public $table ='admin';
-    public $primaryKey='id';
-    public $incrementing=true;
-    public $keyType='int';
-    public $timestamps=true;
+
+    protected $table = 'admin';
+
+     protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }

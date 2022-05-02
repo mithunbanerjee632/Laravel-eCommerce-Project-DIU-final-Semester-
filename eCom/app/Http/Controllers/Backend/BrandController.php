@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
 use App\Http\Controllers\Controller;
-
 use App\Models\BrandModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;

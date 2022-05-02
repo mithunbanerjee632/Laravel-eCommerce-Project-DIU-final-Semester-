@@ -1,7 +1,20 @@
 <?php
-use Illuminate\Support\Facades\Route;
 
-//Frontend
+use Illuminate\Support\Facades\Route;
+/*use App\Http\Controllers\Backend\DashboardController;*/
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\Controller;
+
+
+use App\Http\Controllers\Backend\AdminDashboard;
+use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DistrictControllers;
+use App\Http\Controllers\Backend\DivisionControllers;
+
+
+use App\Http\Controllers\Backend\ProductController;
+
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CategoryModelController;
@@ -11,22 +24,19 @@ use App\Http\Controllers\Frontend\DetailsController;
 use App\Http\Controllers\Frontend\DistrictController;
 use App\Http\Controllers\Frontend\DivisionController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\LoginController;
+
 use App\Http\Controllers\Frontend\PrivacyPolicyController;
-use App\Http\Controllers\Frontend\RegisterController;
+
 use App\Http\Controllers\Frontend\ReturnPolicyController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\TermsConditionController;
 use App\Http\Controllers\Frontend\UserController;
-//backend
-use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\BrandController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\DistrictControllers;
-use App\Http\Controllers\Backend\DivisionControllers;
-use App\Http\Controllers\Backend\HomeControllers;
-use App\Http\Controllers\Backend\ProductController;
 
+use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\Vendor\VendorDashboard;
+use App\Http\Controllers\Vendor\VendorProduct;
+use App\Http\Controllers\Vendor\VendorBrand;
+use App\Http\Controllers\Vendor\VendorCategory;
 
 
 /*
@@ -42,44 +52,43 @@ use App\Http\Controllers\Backend\ProductController;
 
 /*Route::get('/', function () {
     return view('welcome');
+});*/
+
+//backend Authentication login Routes
+Route::get('/admin/login',[AdminController::class,'AdminLogin']);
+Route::post('/admin/loginForm',[AdminController::class,'AdminLoginForm']);
+
+/*Route::get('/admin/dashboard',[DashboardController::class,'AdminDashbord'])->middleware('admin');*/
+
+Route::group(['middleware'=>'admin'],function(){
+    Route::get('/admin/dashboard',[AdminDashboard::class,'AdminDashboard']);
+    Route::get('/admin/logout',[AdminController::class,'AdminLogout']);
 });
-*/
+
+//vendors Authentication login Routes
+Route::get('/vendor/login',[VendorController::class,'VendorLogin']);
+ Route::post('/vendor/loginForm',[VendorController::class,'VendorLoginForm']);
+
+
+Route::group(['middleware'=>'vendor'],function(){
+    Route::get('/vendor/dashboard',[VendorDashboard::class,'vendorDashboard']);
+    Route::get('/vendor/logout',[VendorController::class,'VendorLogout']);
+});
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-/*Route::get('/ShopPage',[ShopController::class,'ShopPage'])->middleware(['auth']);*/
 
 require __DIR__.'/auth.php';
 
 
 
+//Frontend Routes
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-/*Route::get('/', function () {
-    return view('Home');
-});*/
-//error logs
-Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
-
-
-//pages
 Route::get('/',[HomeController::class,'HomePage']);
 
-Route::get('/RegistrationPage',[RegisterController::class,'RegistrationPage']);
-Route::get('/LoginPage',[LoginController::class,'LoginPage']);
 
 
 
@@ -149,14 +158,8 @@ Route::group(['prefix'=>'/districts'],function(){
 });
 
 
+//Backend Routes
 
-
-
-//Backend
-Route::get('/admin/dashboard', [AdminController::class,'AdminDashboard'])->name('admin.dashboard');
-Route::get('/admin/login', [AdminController::class,'AdminLogin'])->name('admin.login.form');
-
-Route::get('/', [HomeControllers::class,'HomeIndex']);
 //Products Management
 Route::get('/products', [ProductController::class,'ProductIndex']);
 Route::get('/getProductsData', [ProductController::class,'ProductsData']);
@@ -183,18 +186,47 @@ Route::post('/UpdateBrand', [BrandController::class,'BrandUpdate']);
 Route::post('/DeleteBrand', [BrandController::class,'BrandDelete']);
 
 //District Management System
-Route::get('/district', [DistrictControllers::class,'DistrictIndex']);
-Route::get('/getDistrictData', [DistrictControllers::class,'DistrictData']);
-Route::post('/DistrictAdd', [DistrictControllers::class,'DistrictAdd']);
-Route::post('/getDistrictDetails', [DistrictControllers::class,'DistrictDetails']);
-Route::post('/UpdateDistrict', [DistrictControllers::class,'DistrictUpdate']);
-Route::post('/DeleteDistrict', [DistrictControllers::class,'DistrictDelete']);
+Route::get('/admin/district', [DistrictController::class,'DistrictIndex']);
+Route::get('/getDistrictData', [DistrictController::class,'DistrictData']);
+Route::post('/DistrictAdd', [DistrictController::class,'DistrictAdd']);
+Route::post('/getDistrictDetails', [DistrictController::class,'DistrictDetails']);
+Route::post('/UpdateDistrict', [DistrictController::class,'DistrictUpdate']);
+Route::post('/DeleteDistrict', [DistrictController::class,'DistrictDelete']);
 
 //Division Management System
 
-Route::get('/division', [DivisionControllers::class,'DivisionIndex']);
-Route::get('/getDivisionsData', [DivisionControllers::class,'DivisionData']);
-Route::post('/DivisionsAdd', [DivisionControllers::class,'DivisionAdd']);
-Route::post('/getDivisionsDetails', [DivisionControllers::class,'DivisionDetails']);
-Route::post('/UpdateDivisions', [DivisionControllers::class,'DivisionUpdate']);
-Route::post('/DeleteDivisions', [DivisionControllers::class,'DivisionDelete']);
+Route::get('/admin/division', [DivisionController::class,'DivisionIndex']);
+Route::get('/getDivisionsData', [DivisionController::class,'DivisionData']);
+Route::post('/DivisionsAdd', [DivisionController::class,'DivisionAdd']);
+Route::post('/getDivisionsDetails', [DivisionController::class,'DivisionDetails']);
+Route::post('/UpdateDivisions', [DivisionController::class,'DivisionUpdate']);
+Route::post('/DeleteDivisions', [DivisionController::class,'DivisionDelete']);
+
+
+
+//Vendor Product Management
+Route::get('/vendor/products', [VendorProduct::class,'VendorProducts']);
+Route::get('/getProductsData', [VendorProduct::class,'ProductsData']);
+Route::post('/ProductAdd', [VendorProduct::class,'ProductAdd']);
+Route::post('/PorductDetails', [VendorProduct::class,'ProductDetails']);
+Route::post('/UpdateProductDetails', [VendorProduct::class,'UpdateProduct']);
+Route::post('/ProductDelete', [VendorProduct::class,'DeleteProduct']);
+
+//Vendor Category Management
+Route::get('/vendor/category', [VendorCategory::class,'VendorCategory']);
+Route::get('/getCategoryData', [VendorCategory::class,'CategoryData']);
+Route::post('/AddCategory', [VendorCategory::class,'CategoryAdd']);
+Route::post('/getCategoryDetails', [VendorCategory::class,'CategoryDetails']);
+Route::post('/CategoryUpdate', [VendorCategory::class,'CategoryUpdate']);
+Route::post('/DeleteCategory', [VendorCategory::class,'CategoryDelete']);
+
+
+
+
+//Vendor Brand Management
+Route::get('/vendor/brand', [VendorBrand::class,'VendorBrand']);
+Route::get('/getBrandsData', [VendorBrand::class,'getBrandsData']);
+Route::post('/BrandAdd', [VendorBrand::class,'BrandAdd']);
+Route::post('/getBrandDetails', [VendorBrand::class,'BrandDetails']);
+Route::post('/UpdateBrand', [VendorBrand::class,'BrandUpdate']);
+Route::post('/DeleteBrand', [VendorBrand::class,'BrandDelete']);
