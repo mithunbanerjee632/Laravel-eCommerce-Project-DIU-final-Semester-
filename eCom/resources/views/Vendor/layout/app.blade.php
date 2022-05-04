@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -40,6 +40,7 @@
 <script type="text/javascript" src="{{asset('assets/js/datatables-select.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/axios.min.js')}}"></script>
+
 
 @yield('script')
 </body>

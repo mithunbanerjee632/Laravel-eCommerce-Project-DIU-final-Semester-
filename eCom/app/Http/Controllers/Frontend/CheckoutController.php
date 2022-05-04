@@ -25,35 +25,8 @@ class CheckoutController extends Controller
 
    function CheckoutStore(Request $request){
 
-/*
-    $this->validate($request,[
-          'name'=>'required',
-          'email'=>'required',
-          'phone'=>'required',
-          'shipping_address'=>'required',
-          'division_id'=>'required',
-          'district_id'=>'required',
-          'zipcode'=>'required',
-          'payment_method_id'=>'required',
-      ]);*/
 
       $order = new Order();
-
-   /*
-     dd( $name,$email,$phone_no,$shipping_address,$division_id,$district_id,$message,$tran);*/
-   /* $name = $request->input('name');
-       $email = $request->input('email');
-     $phone_no = $request->input('phone_no');
-     $shipping_address = $request->input('shipping_address');
-     $division_id = $request->input('division_id');
-     $district_id = $request->input('district_id');
-     $zipcode = $request->input('zipcode');
-     $message = $request->input('message');
-     $transaction_id = $request->input('transaction_id');*/
-   /*  $user_id = $request->input('Auth::id');*/
-
-
-
 
      if($request->payment_method_id != 'cash_in'){
           if($request->transaction_id == NULL || empty($request->transaction_id) ){

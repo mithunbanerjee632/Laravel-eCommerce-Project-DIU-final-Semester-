@@ -33,6 +33,10 @@ class Order extends Model
     }
 
     public function carts(){
-        return $this->belongsto(Cart::class);
+        return $this->hasMany(Cart::class);
+    }
+
+    public function payment(){
+        return $this->belongsto(Payment::class);
     }
 }

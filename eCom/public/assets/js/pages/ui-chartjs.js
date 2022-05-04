@@ -152,7 +152,7 @@ var config3 = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
             {
-                label: "Orders",
+                label: "orders",
                 backgroundColor: "#fff",
                 borderColor: "#fff",
                 data: [20, 40, 20, 200, 10, 540, 723],

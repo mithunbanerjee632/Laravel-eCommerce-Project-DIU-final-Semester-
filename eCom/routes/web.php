@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictControllers;
 use App\Http\Controllers\Backend\DivisionControllers;
+use App\Http\Controllers\Backend\OrdersController;
+
 
 
 use App\Http\Controllers\Backend\ProductController;
@@ -54,26 +56,9 @@ use App\Http\Controllers\Vendor\VendorCategory;
     return view('welcome');
 });*/
 
-//backend Authentication login Routes
-Route::get('/admin/login',[AdminController::class,'AdminLogin']);
-Route::post('/admin/loginForm',[AdminController::class,'AdminLoginForm']);
-
-/*Route::get('/admin/dashboard',[DashboardController::class,'AdminDashbord'])->middleware('admin');*/
-
-Route::group(['middleware'=>'admin'],function(){
-    Route::get('/admin/dashboard',[AdminDashboard::class,'AdminDashboard']);
-    Route::get('/admin/logout',[AdminController::class,'AdminLogout']);
-});
-
-//vendors Authentication login Routes
-Route::get('/vendor/login',[VendorController::class,'VendorLogin']);
- Route::post('/vendor/loginForm',[VendorController::class,'VendorLoginForm']);
 
 
-Route::group(['middleware'=>'vendor'],function(){
-    Route::get('/vendor/dashboard',[VendorDashboard::class,'vendorDashboard']);
-    Route::get('/vendor/logout',[VendorController::class,'VendorLogout']);
-});
+
 
 
 
@@ -158,10 +143,25 @@ Route::group(['prefix'=>'/districts'],function(){
 });
 
 
-//Backend Routes
 
+
+//backend Authentication login Routes
+Route::get('/admin/login',[AdminController::class,'AdminLogin']);
+Route::post('/admin/loginForm',[AdminController::class,'AdminLoginForm']);
+
+/*Route::get('/admin/dashboard',[DashboardController::class,'AdminDashbord'])->middleware('admin');*/
+
+Route::group(['middleware'=>'admin'],function(){
+    Route::get('/admin/dashboard',[AdminDashboard::class,'AdminDashboard']);
+    Route::get('/admin/logout',[AdminController::class,'AdminLogout']);
+    Route::get('/products', [ProductController::class,'ProductIndex']);
+    Route::get('/category', [CategoryController::class,'CategoryIndex']);
+    Route::get('/brand', [BrandController::class,'BrandIndex']);
+});
+
+//Backend Routes
 //Products Management
-Route::get('/products', [ProductController::class,'ProductIndex']);
+
 Route::get('/getProductsData', [ProductController::class,'ProductsData']);
 Route::post('/ProductAdd', [ProductController::class,'ProductAdd']);
 Route::post('/PorductDetails', [ProductController::class,'ProductDetails']);
@@ -170,7 +170,7 @@ Route::post('/ProductDelete', [ProductController::class,'DeleteProduct']);
 
 //Category Management System
 
-Route::get('/category', [CategoryController::class,'CategoryIndex']);
+
 Route::get('/getCategoryData', [CategoryController::class,'CategoryData']);
 Route::post('/AddCategory', [CategoryController::class,'CategoryAdd']);
 Route::post('/getCategoryDetails', [CategoryController::class,'CategoryDetails']);
@@ -178,12 +178,26 @@ Route::post('/CategoryUpdate', [CategoryController::class,'CategoryUpdate']);
 Route::post('/DeleteCategory', [CategoryController::class,'CategoryDelete']);
 
 //Brand Management System
-Route::get('/brand', [BrandController::class,'BrandIndex']);
+
 Route::get('/getBrandsData', [BrandController::class,'getBrandsData']);
 Route::post('/BrandAdd', [BrandController::class,'BrandAdd']);
 Route::post('/getBrandDetails', [BrandController::class,'BrandDetails']);
 Route::post('/UpdateBrand', [BrandController::class,'BrandUpdate']);
 Route::post('/DeleteBrand', [BrandController::class,'BrandDelete']);
+
+//Order Routes
+/*Route::group(['prefix'=>'orders'],function(){
+    Route::get('/',[OrdersController::class,'OrderPage'])->name('admin.orders');
+    Route::get('/view/{id}',[OrdersController::class,'OrderShow'])->name('admin.orders.show');
+    Route::get('/delete/{id}',[OrdersController::class,'OrderDelete'])->name('admin.orders.delete');
+
+});*/
+Route::get('/orders',[OrdersController::class,'OrderPage'])->name('admin.orders');
+Route::get('/orders/view/{id}',[OrdersController::class,'OrderShow'])->name('admin.orders.show');
+Route::post('/orders/delete/{id}',[OrdersController::class,'OrderDelete'])->name('admin.orders.delete');
+Route::post('/orders/completed/{id}',[OrdersController::class,'OrderComplete'])->name('admin.orders.complete');
+Route::post('/orders/paid/{id}',[OrdersController::class,'OrderPaid'])->name('admin.orders.paid');
+
 
 //District Management System
 Route::get('/admin/district', [DistrictController::class,'DistrictIndex']);
@@ -204,8 +218,22 @@ Route::post('/DeleteDivisions', [DivisionController::class,'DivisionDelete']);
 
 
 
+//vendors Authentication login Routes
+Route::get('/vendor/login',[VendorController::class,'VendorLogin']);
+Route::post('/vendor/loginForm',[VendorController::class,'VendorLoginForm']);
+
+
+Route::group(['middleware'=>'vendor'],function(){
+    Route::get('/vendor/dashboard',[VendorDashboard::class,'vendorDashboard']);
+    Route::get('/vendor/logout',[VendorController::class,'VendorLogout']);
+    Route::get('/vendor/products', [VendorProduct::class,'VendorProducts']);
+    Route::get('/vendor/category', [VendorCategory::class,'VendorCategory']);
+    Route::get('/vendor/brand', [VendorBrand::class,'VendorBrand']);
+});
+
+
 //Vendor Product Management
-Route::get('/vendor/products', [VendorProduct::class,'VendorProducts']);
+
 Route::get('/getProductsData', [VendorProduct::class,'ProductsData']);
 Route::post('/ProductAdd', [VendorProduct::class,'ProductAdd']);
 Route::post('/PorductDetails', [VendorProduct::class,'ProductDetails']);
@@ -213,7 +241,7 @@ Route::post('/UpdateProductDetails', [VendorProduct::class,'UpdateProduct']);
 Route::post('/ProductDelete', [VendorProduct::class,'DeleteProduct']);
 
 //Vendor Category Management
-Route::get('/vendor/category', [VendorCategory::class,'VendorCategory']);
+
 Route::get('/getCategoryData', [VendorCategory::class,'CategoryData']);
 Route::post('/AddCategory', [VendorCategory::class,'CategoryAdd']);
 Route::post('/getCategoryDetails', [VendorCategory::class,'CategoryDetails']);
@@ -223,8 +251,9 @@ Route::post('/DeleteCategory', [VendorCategory::class,'CategoryDelete']);
 
 
 
+
 //Vendor Brand Management
-Route::get('/vendor/brand', [VendorBrand::class,'VendorBrand']);
+
 Route::get('/getBrandsData', [VendorBrand::class,'getBrandsData']);
 Route::post('/BrandAdd', [VendorBrand::class,'BrandAdd']);
 Route::post('/getBrandDetails', [VendorBrand::class,'BrandDetails']);

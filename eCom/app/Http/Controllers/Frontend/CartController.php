@@ -30,10 +30,12 @@ class CartController extends Controller
        if(Auth::check()){
            $cart = Cart::Where('user_id',Auth::id())
                ->where('product_id',$request->product_id)
+               ->where('order_id',NULL)
                ->first();
        }else{
            $cart = Cart::Where('ip_address',request()->ip())
                ->where('product_id',$request->product_id)
+               ->where('order_id',NULL)
                ->first();
        }
 

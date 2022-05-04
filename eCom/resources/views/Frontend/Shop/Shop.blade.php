@@ -77,7 +77,18 @@
                                     <div class="product-info">
                                         <a href="/ProductDetails/{{$product->slug}}" class="product-name"><span>{{ $product->title }}</span></a>
                                         <div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
-                                        <a href="#" class="btn add-to-cart">Add To Cart</a>
+
+
+                                      <div class="wrap-butons">
+                                            <form action="{{route('carts.store')}}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                <button class="btn btn-block add-to-cart">Add to Cart</button>
+                                              {{--  <a href="/carts/store/{{$product->id}}" class="btn add-to-cart">Add To Cart</a>--}}
+
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </li>

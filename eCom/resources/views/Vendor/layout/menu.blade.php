@@ -8,7 +8,7 @@
                      <li class="nav-item mt-3">VENDOR</li>
 					</ul>
                     <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item"><a href="{{url('/onlogout')}}" class="btn btn-sm btn-danger">LOGOUT</a></li>
+                        <li class="nav-item"><a href="{{url('/vendor/logout')}}" class="btn btn-sm btn-danger">LOGOUT</a></li>
                     </ul>
                 </div>
             </nav>

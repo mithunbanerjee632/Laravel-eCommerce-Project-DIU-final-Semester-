@@ -72,6 +72,7 @@
                                     <a class="btn btn-increase" href="#"></a>
                                 </div>
                             </div>
+
                             <div class="wrap-butons">
 
 

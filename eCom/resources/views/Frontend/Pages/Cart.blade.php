@@ -15,8 +15,8 @@
                 </ul>
             </div>
 
-            <div class=" main-content-area">
-                <h2 class="text-center mb-5">MYCart Items</h2>
+            <div class=" main-content-area mb-20">
+                <h2 class="text-center ">My Cart Items</h2>
 
                 @if(App\Models\Cart::totalItems() >0)
 
@@ -88,19 +88,44 @@
 
                         </tbody>
                     </table>
+
+                    <div class="summary">
+                        <div class="order-summary">
+                            <h4 class="title-box">Order Summary</h4>
+                            <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}}</b></p>
+                            <p class="summary-info"><span class="title">Shipping Cost</span><b class="index">{{App\Models\Setting::first()->shipping_caust}}</b></p>
+                            <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{ $total_price +App\Models\Setting::first()->shipping_caust}}</b></p>
+                        </div>
+                        <div class="checkout-info">
+                            <label class="checkbox-field">
+                                <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
+                            </label>
+                            <a class="btn btn-checkout" href="{{route('checkouts')}}">Check out</a>
+                            <a class="link-to-shop btn btn-lg btn-info" href="{{url('/ShopPage')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+
+
                     @else
-                    <div class="alert alert-warning">
-                        <strong>There is No cart In Your Items</strong>
+                    <div class="alert alert-warning mt-5">
+                        <h2><strong>There is No cart In Your Items</strong></h2>
 
                         <br>
+
+                        <div class="checkout-info text-center">
+                            <a class="link-to-shop btn btn-lg btn-info " href="{{url('/ShopPage')}}">Shop Now<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
 
                     @endif
 
 
+
+
             </div>
 
-                <div class="summary">
+          {{--      <div class="summary">
                     <div class="order-summary">
                         <h4 class="title-box">Order Summary</h4>
                         <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}}</b></p>
@@ -115,10 +140,10 @@
                         <a class="link-to-shop btn btn-lg btn-info" href="{{url('/ShopPage')}}">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                     <div class="update-clear">
-                        <a class="btn btn-clear" href="{{--/carts/update/{{$cart->id}}--}}">Clear Shopping Cart</a>
-                        <a class="btn btn-update" href="{{--{{url('/carts/delete/{id}',$cart->id)}}--}}">Update Shopping Cart</a>
+                        <a class="btn btn-clear" href="--}}{{--/carts/update/{{$cart->id}}--}}{{--">Clear Shopping Cart</a>
+                        <a class="btn btn-update" href="--}}{{--{{url('/carts/delete/{id}',$cart->id)}}--}}{{--">Update Shopping Cart</a>
                     </div>
-                </div>
+                </div>--}}
 
                 <div class="wrap-show-advance-info-box style-1 box-in-site">
                     <h3 class="title-box">Most Viewed Products</h3>
