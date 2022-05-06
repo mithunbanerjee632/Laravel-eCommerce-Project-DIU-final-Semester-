@@ -123,6 +123,24 @@
                     @endif
 
                     <hr>
+                    <form action="{{route('admin.orders.charge',$order->id)}}"  style="display: inline-block!important;" method="POST">
+                        @csrf
+
+                        <label>Shipping Cost </label>
+                        <input type="number" name="shipping_charge" id="shipping_charge" class="form-control" value="60">
+                        <br>
+                        <label>Custom Discount </label>
+                        <input type="number" name="custom_discount" id="custom_discount" class="form-control" value="0">
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Update">
+
+                        <a href="{{route('admin.orders.invoice',$order->id)}}" class=" ml-2 btn btn-info">Generate Invoice</a>
+
+
+                    </form>
+                    <hr>
+
+
                     <form action="{{route('admin.orders.complete',$order->id)}}" class="form-inline" style="display: inline-block!important;" method="POST">
                         @csrf
 

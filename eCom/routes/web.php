@@ -196,6 +196,8 @@ Route::get('/orders/view/{id}',[OrdersController::class,'OrderShow'])->name('adm
 Route::post('/orders/delete/{id}',[OrdersController::class,'OrderDelete'])->name('admin.orders.delete');
 Route::post('/orders/completed/{id}',[OrdersController::class,'OrderComplete'])->name('admin.orders.complete');
 Route::post('/orders/paid/{id}',[OrdersController::class,'OrderPaid'])->name('admin.orders.paid');
+Route::post('/orders/charge-update/{id}',[OrdersController::class,'ChargeUpdate'])->name('admin.orders.charge');
+Route::get('/orders/invoice/{id}',[OrdersController::class,'generateInvoice'])->name('admin.orders.invoice');
 
 //Sliders
 Route::get('/sliders',[SliderController::class,'SliderPage']);
