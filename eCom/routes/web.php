@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 /*use App\Http\Controllers\Backend\DashboardController;*/
 use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\Controller;
+
 
 
 use App\Http\Controllers\Backend\AdminDashboard;
@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictControllers;
 use App\Http\Controllers\Backend\DivisionControllers;
 use App\Http\Controllers\Backend\OrdersController;
+use App\Http\Controllers\Backend\SliderController;
 
 
 
@@ -26,6 +27,7 @@ use App\Http\Controllers\Frontend\DetailsController;
 use App\Http\Controllers\Frontend\DistrictController;
 use App\Http\Controllers\Frontend\DivisionController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\HomeSlider;
 
 use App\Http\Controllers\Frontend\PrivacyPolicyController;
 
@@ -57,7 +59,7 @@ use App\Http\Controllers\Vendor\VendorCategory;
 });*/
 
 
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 
 
@@ -141,6 +143,8 @@ Route::group(['prefix'=>'/districts'],function(){
     Route::get('/district/edit/{id}', [DistrictController::class,'update'])->name('admin.district.update');
     Route::get('/district/delete/{id}', [DistrictController::class,'delete'])->name('admin.district.delete');
 });
+//slider
+/*Route::get('/homeSlider',[HomeSlider::class,'HomeSlider']);*/
 
 
 
@@ -186,18 +190,20 @@ Route::post('/UpdateBrand', [BrandController::class,'BrandUpdate']);
 Route::post('/DeleteBrand', [BrandController::class,'BrandDelete']);
 
 //Order Routes
-/*Route::group(['prefix'=>'orders'],function(){
-    Route::get('/',[OrdersController::class,'OrderPage'])->name('admin.orders');
-    Route::get('/view/{id}',[OrdersController::class,'OrderShow'])->name('admin.orders.show');
-    Route::get('/delete/{id}',[OrdersController::class,'OrderDelete'])->name('admin.orders.delete');
 
-});*/
 Route::get('/orders',[OrdersController::class,'OrderPage'])->name('admin.orders');
 Route::get('/orders/view/{id}',[OrdersController::class,'OrderShow'])->name('admin.orders.show');
 Route::post('/orders/delete/{id}',[OrdersController::class,'OrderDelete'])->name('admin.orders.delete');
 Route::post('/orders/completed/{id}',[OrdersController::class,'OrderComplete'])->name('admin.orders.complete');
 Route::post('/orders/paid/{id}',[OrdersController::class,'OrderPaid'])->name('admin.orders.paid');
 
+//Sliders
+Route::get('/sliders',[SliderController::class,'SliderPage']);
+Route::get('/getSliderData', [SliderController::class,'SliderData']);
+Route::post('/SliderAdd', [SliderController::class,'SliderAdd']);
+Route::post('/SliderDetails', [SliderController::class,'SliderDetails']);
+Route::post('/UpdateDetails', [SliderController::class,'SliderUpdate']);
+Route::post('/DeleteSlider', [SliderController::class,'SliderDelete']);
 
 //District Management System
 Route::get('/admin/district', [DistrictController::class,'DistrictIndex']);

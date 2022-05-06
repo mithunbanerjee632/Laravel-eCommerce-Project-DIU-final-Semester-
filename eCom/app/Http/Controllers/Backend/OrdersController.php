@@ -56,4 +56,4 @@ class OrdersController extends Controller
         return back();
     }
 }
-/*/orders/view/{id}*/
+

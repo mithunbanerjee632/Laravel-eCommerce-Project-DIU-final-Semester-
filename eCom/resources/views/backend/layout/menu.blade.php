@@ -51,9 +51,16 @@
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="{{url('/orders')/*route('admin.orders')*/}}" class='sidebar-link'>
+                            <a href="{{url('/orders')}}" class='sidebar-link'>
                                 <i class="bi bi-clipboard-data"></i>
                                 <span>Orders</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{{url('/sliders')}}" class='sidebar-link'>
+                                <i class="bi bi-clipboard-data"></i>
+                                <span>Sliders</span>
                             </a>
                         </li>
 
