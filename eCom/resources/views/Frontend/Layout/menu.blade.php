@@ -22,64 +22,64 @@
 
 
 
-                       <div class="topbar-menu right-menu">
+                    <div class="topbar-menu right-menu">
                         <ul>
 
-                   @if (Route::has('login'))
+                            @if (Route::has('login'))
 
-                        @auth
+                                @auth
 
-                         <li class="menu-item menu-item-has-children parent" >
+                                    <li class="menu-item menu-item-has-children parent" >
 
 
 
-                        <a title="Register or Login" href="#">
-                            <img src="{{App\Helpers\ImageHelper::getUserImage( Auth::user()->id )}}" style="width:20px;" class="img rounded-circle">
+                                        <a title="Register or Login" href="#">
+                                            <img src="{{App\Helpers\ImageHelper::getUserImage( Auth::user()->id )}}" style="width:20px;" class="img rounded-circle">
 
-                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-                            <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 
-                        <ul class="submenu curency" >
-                            <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                        <li class="menu-item" >
+                                        <ul class="submenu curency" >
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <li class="menu-item" >
 
-                            <a title="Register or Login" href="route('logout')" onclick="event.preventDefault();
+                                                    <a title="Register or Login" href="route('logout')" onclick="event.preventDefault();
                                 this.closest('form').submit();">{{ __('Log Out') }}</a>
 
-                            <a class="mt-1" title="Register or Login" href="{{route('users.dashboard')}}">My Dashboard</a>
-                        </li>
-                    </form>
-                    </ul>
-                </li>
+                                                    <a class="mt-1" title="Register or Login" href="{{route('users.dashboard')}}">My Dashboard</a>
+                                                </li>
+                                            </form>
+                                        </ul>
+                                    </li>
 
 
-                @else
+                                @else
 
-                    <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
-
-
-                    @if (Route::has('register'))
+                                    <li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
 
 
-                        <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
-                    @endif
-                @endauth
-
-        @endif
+                                    @if (Route::has('register'))
 
 
+                                        <li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
+                                    @endif
+                                @endauth
+
+                            @endif
 
 
-                    <li class="menu-item lang-menu menu-item-has-children parent">
-                        <a title="English" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                        <ul class="submenu lang" >
-                            <li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-hun.png')}}" alt="lang-hun"></span>Hungary</a></li>
-                            <li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-ger.png')}}" alt="lang-ger" ></span>German</a></li>
-                            <li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-fra.png')}}" alt="lang-fre"></span>French</a></li>
-                            <li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-can.png')}}" alt="lang-can"></span>Canada</a></li>
-                        </ul>
-                    </li>
+
+
+                            <li class="menu-item lang-menu menu-item-has-children parent">
+                                <a title="English" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="submenu lang" >
+                                    <li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-hun.png')}}" alt="lang-hun"></span>Hungary</a></li>
+                                    <li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-ger.png')}}" alt="lang-ger" ></span>German</a></li>
+                                    <li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-fra.png')}}" alt="lang-fre"></span>French</a></li>
+                                    <li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-can.png')}}" alt="lang-can"></span>Canada</a></li>
+                                </ul>
+                            </li>
                             <li class="menu-item menu-item-has-children parent" >
                                 <a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="submenu curency" >
@@ -109,7 +109,7 @@
                     <div class="wrap-search center-section">
                         <div class="wrap-search-form">
                             <form action="{{route('search')}}" id="form-search-top" name="form-search-top" method="get">
-                                    <input type="text" name="search" value="" placeholder="Search here..."/>
+                                <input type="text" name="search" value="" placeholder="Search here..."/>
 
                                 <button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 <div class="wrap-list-cate">
@@ -118,7 +118,7 @@
                                     <ul class="list-cate">
                                         <li class="level-0">All Category</li>
                                         @foreach(App\Models\CategoryModel::orderby('id','asc')->get() as $category)
-                                        <li class="level-1">{{$category->category_name}}</li>
+                                            <li class="level-1">{{$category->category_name}}</li>
                                         @endforeach
 
                                     </ul>
@@ -166,7 +166,8 @@
                             <li class="menu-item"><a href="#" class="link-term">Hot Sale items</a><span class="nav-label hot-label">hot</span></li>
                             <li class="menu-item"><a href="#" class="link-term">Top new items</a><span class="nav-label hot-label">hot</span></li>
                             <li class="menu-item"><a href="#" class="link-term">Top Selling</a><span class="nav-label hot-label">hot</span></li>
-                            <li class="menu-item"><a href="#" class="link-term">Top rated items</a><span class="nav-label hot-label">hot</span></li>
+                            <li class="menu-item"><a href="#" class="link-term">Top items</a><span class="nav-label hot-label">hot</span></li>
+                            {{--<li class="menu-item"><a href="#" class="link-term">Top rated items</a><span class="nav-label hot-label">hot</span></li>--}}
                         </ul>
                     </div>
                 </div>

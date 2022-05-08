@@ -89,7 +89,7 @@
                                 <input id="ProductDesId" type="text"  class="form-control mb-3" placeholder="Product Description">
                                 <input id="ProductCatId" type="text" class="form-control mb-3" placeholder="Product Category Id">
                                 <input id="ProductBrandId" type="text"  class="form-control mb-3" placeholder="Product Brand Id">
-                                <input id="ProductAdminId" type="text"  class="form-control mb-3" placeholder="Product Admin Id">
+                                <input id="ProductAdminId" type="text"  class="form-control mb-3" placeholder="vendor Admin Id">
                             </div>
                             <div class="col-md-6">
                                 <input id="ProductSlugId" type="text"  class="form-control mb-3" placeholder="Product Slug">
@@ -134,7 +134,7 @@
                                 <input id="ProductUpdateDesId" type="text"  class="form-control mb-3" placeholder="Product Description">
                                 <input id="ProductUpdateCatId" type="text" class="form-control mb-3" placeholder="Product Category Id">
                                 <input id="ProductUpdateBrandId" type="text"  class="form-control mb-3" placeholder="Product Brand Id">
-                                <input id="ProductUpdateAdminId" type="text"  class="form-control mb-3" placeholder="Product Admin Id">
+                                <input id="ProductUpdateAdminId" type="text"  class="form-control mb-3" placeholder="Product Vendor Id">
                             </div>
                             <div class="col-md-6">
                                 <input id="ProductUpdateSlugId" type="text"  class="form-control mb-3" placeholder="Product Slug">

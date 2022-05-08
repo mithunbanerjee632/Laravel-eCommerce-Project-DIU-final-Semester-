@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ProductImage extends Model
 {
     use HasFactory;
-    public $table ='product_images';
+    public $fillable=[
+        'product_id',
+        'image'
+    ];
+    /*public $table ='product_images';
     public $primaryKey='id';
     public $incrementing=true;
     public $keyType='int';
-    public $timestamps=true;
+    public $timestamps=true;*/
 }

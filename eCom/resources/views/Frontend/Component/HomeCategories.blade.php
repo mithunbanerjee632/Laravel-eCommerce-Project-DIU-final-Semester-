@@ -20,7 +20,7 @@
                     <div class="product product-style-2 equal-elem ">
                         @foreach($product->images as $image)
                         <div class="product-thumnail">
-                            <a href="/ProductDetails/{{$product->slug}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                            <a href="/ProductDetails/{{$product->slug}}/{{$product->title}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
                                 <figure><img src="{{asset($image->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">

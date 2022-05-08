@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use Barryvdh\DomPDF\Facade\Pdf;
+/*use Barryvdh\DomPDF\Facade\Pdf;*/
+use PDF;
 
 class OrdersController extends Controller
 {
@@ -69,7 +70,7 @@ class OrdersController extends Controller
 
     function generateInvoice($id){
         $order = Order::find($id);
-        return view('backend.pages.Orders.Invoice', compact('order'));
+       // return view('backend.pages.Orders.Invoice', compact('order'));
         $pdf = PDF::loadView('backend.pages.Orders.Invoice', compact('order'));
 
         return $pdf->stream('invoice.pdf');

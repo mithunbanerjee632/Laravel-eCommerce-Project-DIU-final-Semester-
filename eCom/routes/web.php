@@ -72,6 +72,16 @@ require __DIR__.'/auth.php';
 
 
 
+
+//Users Routes
+Route::group(['prefix'=>'users'],function(){
+
+    Route::get('/dashboard',[UserController::class,'UserDashboard'])->name('users.dashboard');
+    Route::get('/Profile',[UserController::class,'UserProfile'])->name('users.profile');
+    Route::post('/Profile/update',[UserController::class,'UserProfileUpdate'])->name('users.profile.update');
+
+});
+
 //Frontend Routes
 
 Route::get('/',[HomeController::class,'HomePage']);
@@ -80,16 +90,18 @@ Route::get('/',[HomeController::class,'HomePage']);
 
 
 Route::get('/ReturnPolicyPage',[ReturnPolicyController::class,'ReturnPolicyPage']);
-Route::get('/ContactPage',[ContactController::class,'ContactPage']);
+
 Route::get('/AboutPage',[AboutController::class,'AboutPage']);
 Route::get('/PrivacyPage',[PrivacyPolicyController::class,'PrivacyPage']);
 Route::get('/TermsConditionPage',[TermsConditionController::class,'TermsConditionPage']);
 
 //Products
-Route::get('/ProductDetails/{slug}',[DetailsController::class,'ProductDetails']);
-Route::get('/ShopPage',[ShopController::class,'ShopPage']);
-Route::get('/DetailsPage',[DetailsController::class,'DetailsPage']);
 
+Route::get('/ShopPage',[ShopController::class,'ShopPage']);
+
+//Details
+Route::get('/DetailsPage',[DetailsController::class,'DetailsPage']);
+Route::get('/ProductDetails/{slug}/{title}',[DetailsController::class,'ProductDetails']);
 //Search Products
 Route::get('/search',[ShopController::class,'Search'])->name('search');
 
@@ -111,15 +123,12 @@ Route::group(['prefix'=>'checkouts'],function(){
     Route::post('/store',[CheckoutController::class,'CheckoutStore'])->name('checkouts.store');
 });
 
-//Users
+//Contact Page Routes
+Route::get('/ContactPage',[ContactController::class,'ContactPage']);
+Route::post('/ContactSend',[ContactController::class,'ContactSend']);
 
-Route::group(['prefix'=>'users'],function(){
 
-    Route::get('/dashboard',[UserController::class,'UserDashboard'])->name('users.dashboard');
-    Route::get('/Profile',[UserController::class,'UserProfile'])->name('users.profile');
-    Route::post('/Profile/update',[UserController::class,'UserProfileUpdate'])->name('users.profile.update');
 
-});
 
 
 //Division Routes
@@ -206,6 +215,8 @@ Route::post('/SliderAdd', [SliderController::class,'SliderAdd']);
 Route::post('/SliderDetails', [SliderController::class,'SliderDetails']);
 Route::post('/UpdateDetails', [SliderController::class,'SliderUpdate']);
 Route::post('/DeleteSlider', [SliderController::class,'SliderDelete']);
+
+
 
 //District Management System
 Route::get('/admin/district', [DistrictController::class,'DistrictIndex']);

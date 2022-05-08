@@ -17,8 +17,11 @@
          <div class="row">
            <div class="col-md-3"></div>
            <div class="col-md-6">
-              <h2 class="text-center mt-5">Admin Login</h2>
-
+               <div class="card">
+                   <div class="card-header">
+                 <h2 class="text-center mt-5">Admin Login</h2>
+                   </div>
+                   <div class="card-body">
               @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -45,6 +48,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
             </form>
+           </div>
+         </div>
            </div>
          </div>
    </div>

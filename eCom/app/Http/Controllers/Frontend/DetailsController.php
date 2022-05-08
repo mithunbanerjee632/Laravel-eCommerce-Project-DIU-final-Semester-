@@ -12,14 +12,17 @@ use function view;
 class DetailsController extends Controller
 {
     function DetailsPage(){
-        return view('Details');
+
+        return view('Frontend.Pages.Details');
     }
 
-    function ProductDetails($slug){
-        $products = ProductModel::where('slug',$slug)->get();
+    function ProductDetails($slug,$title){
+        $products = ProductModel::where('slug',$slug)->where('title',$title)->get();
+        $populars = ProductModel::orderby('id','asc')->limit(4)->get();
+        $relatedPro = ProductModel::where('slug',$slug)->limit(8)->get();
 
         if(!is_null($products)){
-            return view('Frontend.Pages.Details')->with('products',$products);
+            return view('Frontend.Pages.Details',['products'=>$products,'populars'=>$populars,'relatedPro'=>$relatedPro])/*->with('products',$products)*/;
         }else{
             Session()->flash('error','Sorry! there is no Product by this url...');
             return redirect('/ShopPage');

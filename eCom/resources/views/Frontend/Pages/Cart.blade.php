@@ -82,7 +82,7 @@
                             <td colspan="4"></td>
                             <td>Total Amount:</td>
                             <td colspan="2">
-                                <strong>{{$total_price}}</strong>.
+                                <strong>{{$total_price}} Taka</strong>.
                             </td>
                         </tr>
 
@@ -92,9 +92,9 @@
                     <div class="summary">
                         <div class="order-summary">
                             <h4 class="title-box">Order Summary</h4>
-                            <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}}</b></p>
-                            <p class="summary-info"><span class="title">Shipping Cost</span><b class="index">{{App\Models\Setting::first()->shipping_caust}}</b></p>
-                            <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{ $total_price +App\Models\Setting::first()->shipping_caust}}</b></p>
+                            <p class="summary-info"><span class="title">Subtotal</span><b class="index">{{$total_price}} Taka</b> </p>
+                            <p class="summary-info"><span class="title">Shipping Cost</span><b class="index">{{App\Models\Setting::first()->shipping_caust}} Taka</b> </p>
+                            <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{ $total_price +App\Models\Setting::first()->shipping_caust}} Taka</b> </p>
                         </div>
                         <div class="checkout-info">
                             <label class="checkbox-field">

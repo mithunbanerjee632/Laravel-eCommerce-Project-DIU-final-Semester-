@@ -12,7 +12,7 @@
             @foreach($product->images as $image)
                 @if($i>0)
             <div class="product-thumnail">
-                <a href="/ProductDetails/{{$product->slug}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                <a href="/ProductDetails/{{$product->slug}}/{{$product->title}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
                     <figure><img src="{{asset($image->image)}}" width="800" height="800" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                 </a>
                 <div class="group-flash">
@@ -30,7 +30,7 @@
 
             @endforeach
             <div class="product-info">
-                <a href="/ProductDetails/{{$product->slug}}" class="product-name"><span>{{$product->title}}</span></a>
+                <a href="/ProductDetails/{{$product->slug}}/{{$product->title}}" class="product-name"><span>{{$product->title}}</span></a>
                 <div class="wrap-price"><span class="product-price">{{$product->price}}</span></div>
             </div>
         </div>

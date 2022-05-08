@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Division extends Model
+class Contact extends Model
 {
     use HasFactory;
-    protected $table = 'divisions';
-
+    protected $table='contacts';
     public $fillable=[
         'name',
-        'priority'
+        'email',
+        'phone_no',
+        'message'
     ];
-
-    function districts(){
-        return $this->hasMany(District::class);
-    }
 }

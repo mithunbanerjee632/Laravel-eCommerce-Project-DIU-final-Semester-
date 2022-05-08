@@ -15,6 +15,11 @@ use Auth;
 
 class CheckoutController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
    function CheckoutPage(){
        $divisions =Division::orderby('priority','asc')->get();
        $districts = District::orderby('division_id','asc')->get();
