@@ -5,7 +5,7 @@
 
     <main id="main" class="main-site">
 
-        <div class="container">
+        <div class="container product_data">
 
             <div class="wrap-breadcrumb">
                 <ul>
@@ -76,13 +76,14 @@
                             <div class="wrap-butons">
 
 
-                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <input type="hidden" class="prod_id" name="product_id" value="{{$product->id}}">
                                     <button class="btn btn-block add-to-cart">Add to Cart</button>
                                 </form>
                                {{-- <a href="{{route('carts.store')}}" class="btn add-to-cart">Add to Cart</a>--}}
                                 <div class="wrap-btn">
+                                    <input type="hidden" id="prod_id" class="prod_id" name="product_id" value="{{$product->id}}">
                                     <a href="#" class="btn btn-compare">Add Compare</a>
-                                    <a href="#" class="btn btn-wishlist">Add Wishlist</a>
+                                    <a href="{{--{{url('/')}}--}}" class="btn btn-wishlist addToWishlist">Add Wishlist</a>
                                 </div>
                             </div>
                         </div>
@@ -430,4 +431,52 @@
     </main>
 
 
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $('.addToWishlist').click(function(e){
+            e.preventDefault();
+            var product_id = $('#prod_id').val();
+
+           /* var product_id = $(this).closest('.product_data').find('prod_id').val();*/
+         /*   var product_id = $('prod_id').val();*/
+
+            /* $.ajax({
+                 method: 'POST',
+                 url:'/AddToWishlist',
+                 data:{
+                     'product_id':product_id,
+                 },
+                 success:function(response){
+                    swal(response.status);
+                 },
+
+             });*/
+            WishlistAdd(product_id)
+        });
+
+
+        function WishlistAdd(product_id){
+            $('.addToWishlist').html('Add to Wishlist');
+            axios.post('/AddToWishlist',{
+                product_id:product_id
+            }).then(function(response){
+                if(response.status ==200){
+                    if(response.data ==1){
+                        $('.addToWishlist').html('Product Added to Wishlist');
+                    }else{
+                        $('.addToWishlist').html('Product Not Added to Wishlist');
+                    }
+
+
+                }else{
+                    $('.addToWishlist').html('Somethingn Went Wrong');
+
+                }
+            }).catch(function(error){
+                $('.addToWishlist').html('Somethingn Went Wrong');
+
+            });
+        }
+    </script>
 @endsection

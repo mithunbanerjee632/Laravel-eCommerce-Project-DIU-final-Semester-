@@ -35,6 +35,7 @@ use App\Http\Controllers\Frontend\ReturnPolicyController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\TermsConditionController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorDashboard;
@@ -110,11 +111,19 @@ Route::get('/search',[ShopController::class,'Search'])->name('search');
 Route::get('/allCategories/{id}',[CategoryModelController::class,'ProductByCategories'])->name('categories.product');
 
 
-//carts
+//carts Routes
 Route::get('/CartPage',[CartController::class,'CartPage']);
 Route::post('/carts/store',[CartController::class,'CartStore'])->name('carts.store');
 Route::post('/carts/update/{id}',[CartController::class,'CartUpdate'])->name('carts.update');
 Route::post('/carts/delete/{id}',[CartController::class,'CartDelete'])->name('carts.delete');
+
+//WishList Routes
+
+Route::post('/AddToWishlist',[WishlistController::class,'WishlistData']);
+Route::post('wishlist/delete/{id}',[WishlistController::class,'WishlistDelete'])->name('wishlist.delete');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/WishList',[WishlistController::class,'WishlistPage']);
+});
 
 //Checkouts
 Route::group(['prefix'=>'checkouts'],function(){

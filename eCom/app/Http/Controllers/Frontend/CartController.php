@@ -15,6 +15,10 @@ use Auth;
 
 class CartController extends Controller
 {
+   /* public function __construct(){
+        $this->middleware('auth');
+    }*/
+
    function CartPage(){
        return view('Frontend.Pages.Cart');
    }

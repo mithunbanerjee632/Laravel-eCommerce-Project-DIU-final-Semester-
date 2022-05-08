@@ -49,7 +49,9 @@
 <script src="{{asset('js/jquery.countdown.min.js')}}"></script>
 <script src="{{asset('js/jquery.sticky.js')}}"></script>
 <script src="{{asset('js/functions.js')}}"></script>
-@yield('script')
 <script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
+
+@yield('script')
+
 {{--<script type="text/javascript" src="{{asset('js/custom.js')}}"></script>--}}
 </body>
