@@ -236,6 +236,7 @@ Route::post('/deleteCustomer',[CustomerController::class,'CustomerDelete']);
 
 //User Management Routes
 Route::get('/getUserData',[AdminUserController::class,'UserData']);
+Route::post('/getUserDetails',[AdminUserController::class,'UserDetails']);
 Route::post('/deleteUser',[AdminUserController::class,'UserDelete']);
 
 //District Management System

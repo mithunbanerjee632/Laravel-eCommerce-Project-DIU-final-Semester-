@@ -74,6 +74,13 @@
                         </li>
 
                         <li class="sidebar-item  ">
+                            <a href="{{url('/users')}}" class='sidebar-link'>
+                                <i class="bi bi-person"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
                             <a href="{{url('/divisions')}}" class='sidebar-link'>
                                 <i class="bi bi-clipboard-data"></i>
                                 <span>Sliders</span>

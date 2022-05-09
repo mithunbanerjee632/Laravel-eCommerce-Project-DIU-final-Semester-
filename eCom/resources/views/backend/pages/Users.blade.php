@@ -109,7 +109,6 @@
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                      <button  id="brandUpdateConfirmBtn" type="button" class="btn btn-danger">Save</button>
 
                   </div>
               </div>
