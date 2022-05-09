@@ -67,9 +67,23 @@
 
 
                         <li class="sidebar-item  ">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{url('/customers')}}" class='sidebar-link'>
                                 <i class="bi bi-person"></i>
                                 <span>Customers</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{{url('/divisions')}}" class='sidebar-link'>
+                                <i class="bi bi-clipboard-data"></i>
+                                <span>Sliders</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{{url('/districts')}}" class='sidebar-link'>
+                                <i class="bi bi-clipboard-data"></i>
+                                <span>Sliders</span>
                             </a>
                         </li>
 

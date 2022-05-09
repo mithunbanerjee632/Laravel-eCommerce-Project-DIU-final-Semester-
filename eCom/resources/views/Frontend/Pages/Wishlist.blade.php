@@ -49,7 +49,7 @@
                                 <tr >
                                     <th scope="row">{{$loop->index +1}}</th>
                                     <td>
-                                        <a href="/ProductDetails/{{$wish->product->slug}}">{{$wish->product->title}}</a>
+                                        <a href="/ProductDetails/{{$wish->product->slug}}/{{$wish->product->title}}">{{$wish->product->title}}</a>
                                     </td>
                                     <td>
                                         @if($wish->product->images->count()>0)

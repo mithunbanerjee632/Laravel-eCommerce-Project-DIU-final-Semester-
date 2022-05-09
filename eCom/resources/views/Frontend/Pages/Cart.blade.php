@@ -41,7 +41,7 @@
                             <tr >
                                 <th scope="row">{{$loop->index +1}}</th>
                                 <td>
-                                    <a href="/ProductDetails/{{$cart->product->slug}}">{{$cart->product->title}}</a>
+                                    <a href="/ProductDetails/{{$cart->product->slug}}/{{$cart->product->title}}">{{$cart->product->title}}</a>
                                 </td>
                                 <td>
                                     @if($cart->product->images->count()>0)

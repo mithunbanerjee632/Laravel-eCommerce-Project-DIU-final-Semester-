@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 /*use App\Http\Controllers\Backend\DashboardController;*/
 use App\Http\Controllers\Backend\AdminController;
@@ -13,7 +14,8 @@ use App\Http\Controllers\Backend\DistrictControllers;
 use App\Http\Controllers\Backend\DivisionControllers;
 use App\Http\Controllers\Backend\OrdersController;
 use App\Http\Controllers\Backend\SliderController;
-
+use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\AdminUserController;
 
 
 use App\Http\Controllers\Backend\ProductController;
@@ -179,6 +181,9 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('/products', [ProductController::class,'ProductIndex']);
     Route::get('/category', [CategoryController::class,'CategoryIndex']);
     Route::get('/brand', [BrandController::class,'BrandIndex']);
+    Route::get('/sliders',[SliderController::class,'SliderPage']);
+    Route::get('/customers', [CustomerController::class,'CustomerIndex']);
+    Route::get('/users', [AdminUserController::class,'UserIndex']);
 });
 
 //Backend Routes
@@ -218,14 +223,20 @@ Route::post('/orders/charge-update/{id}',[OrdersController::class,'ChargeUpdate'
 Route::get('/orders/invoice/{id}',[OrdersController::class,'generateInvoice'])->name('admin.orders.invoice');
 
 //Sliders
-Route::get('/sliders',[SliderController::class,'SliderPage']);
+
 Route::get('/getSliderData', [SliderController::class,'SliderData']);
 Route::post('/SliderAdd', [SliderController::class,'SliderAdd']);
 Route::post('/SliderDetails', [SliderController::class,'SliderDetails']);
 Route::post('/UpdateDetails', [SliderController::class,'SliderUpdate']);
 Route::post('/DeleteSlider', [SliderController::class,'SliderDelete']);
 
+//Customers Management Routes
+Route::get('/getCustomerData',[CustomerController::class,'CustomerData']);
+Route::post('/deleteCustomer',[CustomerController::class,'CustomerDelete']);
 
+//User Management Routes
+Route::get('/getUserData',[AdminUserController::class,'UserData']);
+Route::post('/deleteUser',[AdminUserController::class,'UserDelete']);
 
 //District Management System
 Route::get('/admin/district', [DistrictController::class,'DistrictIndex']);

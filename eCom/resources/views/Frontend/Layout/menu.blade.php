@@ -1,7 +1,7 @@
 <!-- mobile menu -->
 <div class="mercado-clone-wrap">
     <div class="mercado-panels-actions-wrap">
-        <a class="mercado-close-btn mercado-close-panels" href="#">x</a>
+        <a class="mercado-close-btn mercado-close-panels" href="{{url('/')}}">x</a>
     </div>
     <div class="mercado-panels"></div>
 </div>
@@ -178,9 +178,7 @@
                             <li class="menu-item home-icon">
                                 <a href="{{url('/')}}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{url('/AboutPage')}}" class="link-term mercado-item-title">About Us</a>
-                            </li>
+
                             <li class="menu-item">
                                 <a href="{{url('/ShopPage')}}" class="link-term mercado-item-title">Shop</a>
                             </li>
@@ -192,6 +190,9 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{url('/ContactPage')}}" class="link-term mercado-item-title">Contact Us</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{url('/AboutPage')}}" class="link-term mercado-item-title">About Us</a>
                             </li>
                         </ul>
                     </div>

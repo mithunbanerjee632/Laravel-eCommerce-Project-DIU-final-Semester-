@@ -18,8 +18,32 @@
         <div class="container">
             <!-- <div class="main-content-area"> -->
             <div class="aboutus-info style-center">
-                <b class="box-title">Interesting Facts</b>
-                <p class="txt-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text ever since the 1500s, when an unknown printer took a galley of type</p>
+                <b class="box-title">About Us</b>
+                <p class="txt-justify" style="font-size: 16px; line-height: 24px;"> Ecommerce Multivendor Store is the largest one-stop shopping destination in Bangladesh. Launched in 2022, the online store offers the widest range of products in categories ranging from electronics to household appliances, latest smart phones, Camera, Computing & accessories fashion, health equipment and makeup.
+
+                    Pickaboo believes in “Delivering Happiness” with an excellent customer experience thus provides the most efficient delivery service through own logistics so that customers get a hassle-free product delivery at their doorstep. We help our local and international vendors as well as 200 brands serving thousands of consumers from all over Bangladesh. We also offer free returns and various payment methods including Cash on delivery, Online Payments, Card on delivery and bKash with all of our products.
+
+                    Follow us on Facebook to stay updated about our latest offers and promotions. Happy Online Shopping!</p>
+            </div>
+
+            <div class="aboutus-info style-center">
+                <i class="fa fa-brain-arrow-curved-right"></i>
+                <b class="box-title">Make the right choice</b>
+                <p class="text-justify" style="font-size: 16px; line-height: 24px;">Indulge in Genuine and quality products
+
+                    Ecommerce Multivendor Store lets you discover and experience the best of every product. Our team works with a variety of brands and vendors from all over the world to bring in new products everyday.</p>
+
+                <ul style="font-size: 16px; line-height: 24px;">
+                    <li class="text-justify" >  Ultimate one-stop shopping experience in Bangladesh</li>
+                    <li class="text-justify">   Most trusted online shopping platform</li>
+                    <li class="text-justify">   Wide selection of the best local and foreign brands</li>
+                    <li class="text-justify"> Fastest Delivery service</li>
+                    <li class="text-justify">   3 Days Easy Return</li>
+                    <li class="text-justify">   Genuine and authentic products</li>
+                    <li class="text-justify">  Warranty Facility</li>
+                    <li class="text-justify">   0% interest EMI schemes</li>
+                </ul>
+
             </div>
 
             <div class="row equal-container">

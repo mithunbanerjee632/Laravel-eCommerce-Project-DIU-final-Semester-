@@ -22,7 +22,12 @@ class HomeController extends Controller
         $products = ProductModel::orderby('id','asc')->limit(6)->get();
         $banners = Banner::where('id','=','1')->orWhere('id','=','2')->get();
         $CatBanners = Banner::where('id','=','3')->get();
-        return view('Frontend.Pages.Home',['products'=>$products,'sliders'=>$sliders,'banners'=>$banners,'CatBanners'=>$CatBanners])/*->with('products',$products)*/;
+        return view('Frontend.Pages.Home',
+            ['products'=>$products,
+                'sliders'=>$sliders,
+                'banners'=>$banners,
+                'CatBanners'=>$CatBanners
+            ])/*->with('products',$products)*/;
 
         /*$SalesData = json_decode(ProductModel::orderby('id','desc')->get());
         return view('Home',['SalesData'=>$SalesData]);*/
